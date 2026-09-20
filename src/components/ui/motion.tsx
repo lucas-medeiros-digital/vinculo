@@ -23,12 +23,12 @@ export const staggerContainer: Variants = {
 /** Shared hover treatment for cards: scale via framer, stronger shadow via CSS. */
 export const CARD_HOVER: TargetAndTransition = { scale: 1.02 }
 export const cardHoverClasses =
-  'transition-shadow duration-300 hover:shadow-[0_10px_34px_rgba(21,59,46,0.12)]'
+  'transition-shadow duration-300 hover:shadow-[0_10px_34px_rgba(12,58,48,0.12)]'
 
 /**
  * Reveal-on-enter detector. Uses IntersectionObserver, plus a polling safety net
  * that reveals the element if it is genuinely inside the viewport but the
- * observer hasn't fired (covers programmatic/anchor jumps like `#metodo`). Never
+ * observer hasn't fired (covers programmatic/anchor jumps like `#contacto`). Never
  * reveals content that is still off-screen.
  */
 export function useReveal(amount = 0.2) {

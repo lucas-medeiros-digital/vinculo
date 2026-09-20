@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Clock, Menu, X } from 'lucide-react'
 import { HoverRollButton } from './ui/HoverRollButton'
 import { useMontevideoTime } from '../hooks/useMontevideoTime'
-import { NAV_LINKS } from '../lib/constants'
+import { NAV_LINKS, openCalendly } from '../lib/constants'
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -14,41 +15,39 @@ export function Navbar() {
         <nav className="flex items-center justify-between rounded-full bg-white p-[5px] pl-[5px]">
           {/* LEFT: logo + nav links */}
           <div className="flex items-center gap-6">
-            <a href="#" className="flex items-center" aria-label="Vínculo — inicio">
-              {/* Logo placeholder — swap for the real Vínculo mark when available */}
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#153B2E] font-fraunces text-[14px] font-bold tracking-tight text-[#F7F5F0] sm:h-10 sm:w-10 sm:text-[16px]">
-                V
-              </span>
-            </a>
+            <Link to="/" className="flex items-center pl-2" aria-label="Vínculo — inicio">
+              <img
+                src="/logos/vinculo-horizontal-green.png"
+                alt="Vínculo — Growth Marketing"
+                className="h-7 w-auto sm:h-8"
+              />
+            </Link>
             <div className="hidden items-center gap-6 md:flex">
               {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
+                <Link
+                  key={link.to}
+                  to={link.to}
                   className="text-[14px] text-gray-900 transition-colors duration-300 hover:text-gray-500"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* RIGHT: status + clock + CTA (desktop) */}
+          {/* RIGHT: clock + CTA (desktop) */}
           <div className="hidden items-center gap-5 md:flex">
-            <span className="hidden text-[13px] text-gray-600 lg:inline">
-              Tomando nuevos clientes para Q1 2026
-            </span>
             <span className="flex items-center gap-1.5 text-[13px] text-gray-600">
               <Clock size={14} />
               {time} en Montevideo
             </span>
             <HoverRollButton
-              text="Solicitar diagnóstico"
-              href="#contacto"
-              className="bg-[#153B2E] py-2 pl-5 pr-2 text-white hover:bg-[#0F2C22]"
+              text="Agendá una reunión"
+              onClick={openCalendly}
+              className="bg-[#0C3A30] py-2 pl-5 pr-2 text-white hover:bg-[#0A2E26]"
               textClassName="text-[13px]"
               circleClassName="w-6 h-6 bg-[#F7F5F0]"
-              arrowClassName="w-3.5 h-3.5 text-[#153B2E]"
+              arrowClassName="w-3.5 h-3.5 text-[#0C3A30]"
             />
           </div>
 
@@ -57,7 +56,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMenuOpen(true)}
             aria-label="Abrir menú"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#153B2E] text-white md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C3A30] text-white md:hidden"
           >
             <Menu size={18} />
           </button>
@@ -104,7 +103,7 @@ function MobileMenu({ open, time, onClose }: MobileMenuProps) {
             type="button"
             onClick={onClose}
             aria-label="Cerrar menú"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#153B2E] text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C3A30] text-white"
           >
             <X size={18} />
           </button>
@@ -112,26 +111,28 @@ function MobileMenu({ open, time, onClose }: MobileMenuProps) {
 
         <div className="flex flex-col gap-1">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.to}
+              to={link.to}
               onClick={onClose}
               className="font-fraunces text-[28px] font-medium leading-[32px] text-[#0F1A15]"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="mt-6">
           <HoverRollButton
-            text="Solicitar diagnóstico"
-            href="#contacto"
-            onClick={onClose}
-            className="w-full justify-between bg-[#153B2E] py-3 pl-6 pr-2 text-white hover:bg-[#0F2C22]"
+            text="Agendá una reunión"
+            onClick={() => {
+              onClose()
+              openCalendly()
+            }}
+            className="w-full justify-between bg-[#0C3A30] py-3 pl-6 pr-2 text-white hover:bg-[#0A2E26]"
             textClassName="text-[15px]"
             circleClassName="w-8 h-8 bg-[#F7F5F0]"
-            arrowClassName="w-4 h-4 text-[#153B2E]"
+            arrowClassName="w-4 h-4 text-[#0C3A30]"
           />
         </div>
       </div>

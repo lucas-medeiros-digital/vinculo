@@ -1,13 +1,18 @@
-import { Reveal, StaggerGroup, StaggerItem, AnimatedUnderline } from '../ui/motion'
+import { Reveal, StaggerGroup, StaggerItem, AnimatedUnderline, CARD_HOVER } from '../ui/motion'
 
-// Real logos pending — swap each placeholder for `/logos/{name}.svg` later.
-const CLIENTS: (string | null)[] = [
-  'Pirez Aluminio',
-  'Clínica Vítola',
-  'Semillero de Innovación',
-  null,
-  null,
-  null,
+interface Client {
+  name: string
+  src: string
+}
+
+const CLIENTS: Client[] = [
+  { name: 'Pirez Aluminio', src: '/logos/clients/pirez.png' },
+  { name: 'Clínica Vítola', src: '/logos/clients/vitola.png' },
+  { name: 'Semillero de Innovación', src: '/logos/clients/semillero.png' },
+  { name: 'RedOne — Redes Deportivas', src: '/logos/clients/redone.png' },
+  { name: 'Merladett Construcciones', src: '/logos/clients/merladett.png' },
+  { name: 'Expande Business & Trade', src: '/logos/clients/expande.png' },
+  { name: 'Windoor Aluminios', src: '/logos/clients/windoor.png' },
 ]
 
 const RUBROS = [
@@ -26,7 +31,7 @@ export function Clients() {
     >
       <div className="mx-auto max-w-[1440px]">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="font-inter text-[13px] font-medium uppercase tracking-[0.2em] text-[#C8A45A]">
+          <p className="font-jakarta text-[13px] font-medium uppercase tracking-[0.2em] text-[#C8A45A]">
             Nuestros clientes
           </p>
           <h2
@@ -35,17 +40,25 @@ export function Clients() {
           >
             Marcas que confían en <AnimatedUnderline>Vínculo</AnimatedUnderline>.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl font-inter text-[15px] leading-relaxed text-gray-600">
-            Trabajamos con pymes de distintos rubros que buscan crecer con
-            estrategia y ejecución profesional.
+          <p className="mx-auto mt-4 max-w-2xl font-jakarta text-[15px] leading-relaxed text-gray-600">
+            Trabajamos con negocios de distintos rubros que ya funcionan y
+            buscan escalar con estrategia y ejecución profesional.
           </p>
         </Reveal>
 
-        {/* Logo grid — placeholders until the real SVGs arrive */}
-        <StaggerGroup className="mt-12 grid grid-cols-2 items-center gap-8 sm:mt-16 sm:grid-cols-3 lg:grid-cols-6">
-          {CLIENTS.map((name, i) => (
-            <StaggerItem key={name ?? `slot-${i}`} className="flex justify-center">
-              <LogoPlaceholder name={name} />
+        {/* Logo wall */}
+        <StaggerGroup className="mx-auto mt-12 flex max-w-5xl flex-wrap justify-center gap-4 sm:mt-16 sm:gap-5">
+          {CLIENTS.map((client) => (
+            <StaggerItem
+              key={client.name}
+              whileHover={CARD_HOVER}
+              className="flex h-24 w-[calc(50%-0.5rem)] items-center justify-center rounded-xl border border-[#EBE8DF] bg-white p-5 transition-colors duration-300 hover:border-[#C8A45A]/50 sm:h-28 sm:w-44 lg:w-48"
+            >
+              <img
+                src={client.src}
+                alt={client.name}
+                className="max-h-11 w-auto object-contain opacity-80 transition-opacity duration-300 hover:opacity-100 sm:max-h-12"
+              />
             </StaggerItem>
           ))}
         </StaggerGroup>
@@ -55,7 +68,7 @@ export function Clients() {
           {RUBROS.map((rubro) => (
             <span
               key={rubro}
-              className="rounded-full border border-[#EBE8DF] bg-[#F7F5F0] px-4 py-2 font-inter text-[13px] text-gray-700"
+              className="rounded-full border border-[#EBE8DF] bg-[#F7F5F0] px-4 py-2 font-jakarta text-[13px] text-gray-700"
             >
               {rubro}
             </span>
@@ -63,21 +76,5 @@ export function Clients() {
         </Reveal>
       </div>
     </section>
-  )
-}
-
-function LogoPlaceholder({ name }: { name: string | null }) {
-  if (!name) {
-    // Empty slot for a future client.
-    return (
-      <div className="flex h-12 w-full max-w-[160px] items-center justify-center rounded-md border border-dashed border-gray-200 bg-gray-50 sm:h-14" />
-    )
-  }
-  return (
-    <div className="flex h-12 w-full max-w-[160px] items-center justify-center rounded-md bg-gray-200 px-2 text-center opacity-70 transition duration-300 hover:opacity-100 sm:h-14">
-      <span className="font-inter text-[11px] font-medium leading-tight text-gray-500">
-        {name}
-      </span>
-    </div>
   )
 }

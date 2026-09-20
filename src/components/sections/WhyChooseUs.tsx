@@ -55,9 +55,9 @@ export function WhyChooseUs() {
             <StaggerItem
               key={block.number}
               whileHover={CARD_HOVER}
-              className="group rounded-xl border border-[#EBE8DF] bg-white p-6 transition-[border-color,box-shadow] duration-300 hover:border-[#153B2E] hover:shadow-[0_10px_34px_rgba(21,59,46,0.12)] sm:rounded-2xl sm:p-7"
+              className="group rounded-xl border border-[#EBE8DF] bg-white p-6 transition-[border-color,box-shadow] duration-300 hover:border-[#0C3A30] hover:shadow-[0_10px_34px_rgba(12,58,48,0.12)] sm:rounded-2xl sm:p-7"
             >
-              <span className="mb-4 block font-fraunces text-[48px] font-medium leading-none text-[#C8A45A] transition-colors duration-300 group-hover:text-[#153B2E] sm:text-[56px]">
+              <span className="mb-4 block font-fraunces text-[48px] font-medium leading-none text-[#C8A45A] transition-colors duration-300 group-hover:text-[#0C3A30] sm:text-[56px]">
                 {block.number}
               </span>
               <h3 className="mb-2 font-fraunces text-[18px] font-medium text-[#0F1A15] sm:text-[20px]">

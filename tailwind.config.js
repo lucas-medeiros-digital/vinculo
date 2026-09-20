@@ -5,11 +5,15 @@ export default {
     extend: {
       fontFamily: {
         fraunces: ['Fraunces', 'Georgia', 'serif'],
-        inter: ['Inter', 'system-ui', 'sans-serif'],
+        jakarta: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        // Alias kept so existing `font-inter` usages resolve to the brand font.
+        inter: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
-          green: '#153B2E',
+          green: '#0C3A30',
+          greenDark: '#072620',
           gold: '#C8A45A',
           cream: '#F7F5F0',
         },

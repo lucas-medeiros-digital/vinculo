@@ -60,7 +60,7 @@ export function FinalCta() {
   return (
     <section
       id="contacto"
-      className="relative overflow-hidden bg-[#153B2E] px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-28"
+      className="relative overflow-hidden bg-[#0C3A30] px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-28"
     >
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-start gap-10 lg:grid-cols-[45%_55%] lg:gap-16">
         {/* LEFT */}
@@ -126,7 +126,7 @@ function FormCard() {
         </span>
         <div className="h-1 flex-1 overflow-hidden rounded-full bg-[#EBE8DF]">
           <div
-            className="h-full rounded-full bg-[#153B2E] transition-all duration-500"
+            className="h-full rounded-full bg-[#0C3A30] transition-all duration-500"
             style={{ width: `${step * 25}%` }}
           />
         </div>
@@ -206,7 +206,7 @@ function FormCard() {
                 />
               </Field>
               <Field label="WhatsApp" required>
-                <div className="flex overflow-hidden rounded-xl border border-[#EBE8DF] bg-white transition focus-within:border-[#153B2E] focus-within:ring-2 focus-within:ring-[#153B2E]/10">
+                <div className="flex overflow-hidden rounded-xl border border-[#EBE8DF] bg-white transition focus-within:border-[#0C3A30] focus-within:ring-2 focus-within:ring-[#0C3A30]/10">
                   <span className="flex items-center gap-1 border-r border-[#EBE8DF] bg-[#F7F5F0] px-3 font-inter text-[14px] text-gray-700">
                     🇺🇾 {data.countryCode}
                   </span>
@@ -258,7 +258,7 @@ function FormCard() {
             type="button"
             disabled={!canContinue}
             onClick={() => setStep(step + 1)}
-            className="rounded-full bg-[#153B2E] px-6 py-3 font-inter text-sm font-medium text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-full bg-[#0C3A30] px-6 py-3 font-inter text-sm font-medium text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-40"
           >
             Siguiente →
           </button>
@@ -285,7 +285,7 @@ function FormCard() {
 }
 
 const inputClasses =
-  'w-full rounded-xl border border-[#EBE8DF] bg-white px-4 py-3 font-inter text-[14px] transition focus:border-[#153B2E] focus:outline-none focus:ring-2 focus:ring-[#153B2E]/10'
+  'w-full rounded-xl border border-[#EBE8DF] bg-white px-4 py-3 font-inter text-[14px] transition focus:border-[#0C3A30] focus:outline-none focus:ring-2 focus:ring-[#0C3A30]/10'
 
 function Step({
   title,
@@ -327,11 +327,11 @@ function OptionButton({
       onClick={onClick}
       className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition duration-200 ${
         selected
-          ? 'border-[#153B2E] bg-[#153B2E] text-white'
-          : 'border-[#EBE8DF] bg-white hover:border-[#153B2E]'
+          ? 'border-[#0C3A30] bg-[#0C3A30] text-white'
+          : 'border-[#EBE8DF] bg-white hover:border-[#0C3A30]'
       }`}
     >
-      <Icon size={18} className={selected ? 'text-[#C8A45A]' : 'text-[#153B2E]'} />
+      <Icon size={18} className={selected ? 'text-[#C8A45A]' : 'text-[#0C3A30]'} />
       <span className="flex-1 font-inter text-[14px] font-medium">{option.label}</span>
       {selected && <Check size={16} className="text-[#C8A45A]" />}
     </button>
@@ -361,7 +361,7 @@ function Field({
 function SuccessScreen() {
   return (
     <div className="py-4">
-      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#153B2E]">
+      <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#0C3A30]">
         <Check size={32} className="text-[#C8A45A]" />
       </div>
       <h3 className="mb-3 text-center font-fraunces text-[24px] font-medium text-[#0F1A15] sm:text-[28px]">
@@ -377,7 +377,7 @@ function SuccessScreen() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-inter font-medium text-[#153B2E] hover:underline"
+          className="font-inter font-medium text-[#0C3A30] hover:underline"
         >
           ¿No querés esperar? Escribinos ahora por WhatsApp →
         </a>

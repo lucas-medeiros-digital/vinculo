@@ -204,7 +204,7 @@ function TabButton({ solution, active, expandable, onClick }: TabButtonProps) {
       onClick={onClick}
       className={`flex w-full items-center gap-3 rounded-xl border px-5 py-4 text-left transition-all duration-300 ${
         active
-          ? 'border-[#153B2E] bg-[#153B2E] text-white'
+          ? 'border-[#0C3A30] bg-[#0C3A30] text-white'
           : 'border-[#EBE8DF] bg-white hover:border-[#C8A45A]'
       }`}
     >
@@ -213,7 +213,7 @@ function TabButton({ solution, active, expandable, onClick }: TabButtonProps) {
           active ? 'bg-[#C8A45A]/20' : 'bg-[#F7F5F0]'
         }`}
       >
-        <Icon size={18} className={active ? 'text-[#C8A45A]' : 'text-[#153B2E]'} />
+        <Icon size={18} className={active ? 'text-[#C8A45A]' : 'text-[#0C3A30]'} />
       </span>
       <span className="font-inter text-[14px] font-medium sm:text-[15px]">
         {solution.label}
@@ -250,7 +250,7 @@ function PanelContent({ solution }: { solution: Solution }) {
       <ul className="flex flex-col gap-3">
         {solution.bullets.map((bullet) => (
           <li key={bullet} className="flex items-start gap-3">
-            <Check size={18} className="mt-0.5 shrink-0 text-[#153B2E]" />
+            <Check size={18} className="mt-0.5 shrink-0 text-[#0C3A30]" />
             <span className="font-inter text-[14px] text-gray-800 sm:text-[15px]">
               {bullet}
             </span>

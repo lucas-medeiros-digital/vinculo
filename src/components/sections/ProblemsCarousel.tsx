@@ -80,7 +80,7 @@ export function ProblemsCarousel() {
               data-card
               variants={fadeUpItem}
               whileHover={CARD_HOVER}
-              className={`w-[85%] shrink-0 snap-start rounded-xl border border-[#EBE8DF] bg-white p-6 shadow-[0_2px_16px_rgba(21,59,46,0.04)] sm:w-[380px] sm:rounded-2xl sm:p-8 lg:w-[420px] ${cardHoverClasses}`}
+              className={`w-[85%] shrink-0 snap-start rounded-xl border border-[#EBE8DF] bg-white p-6 shadow-[0_2px_16px_rgba(12,58,48,0.04)] sm:w-[380px] sm:rounded-2xl sm:p-8 lg:w-[420px] ${cardHoverClasses}`}
             >
               <span className="mb-3 block font-fraunces text-4xl italic leading-none text-[#C8A45A]">
                 &ldquo;
@@ -101,7 +101,7 @@ export function ProblemsCarousel() {
             type="button"
             onClick={() => scrollByCard(-1)}
             aria-label="Anterior"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#EBE8DF] bg-white text-[#0F1A15] transition-colors duration-300 hover:border-[#153B2E]"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#EBE8DF] bg-white text-[#0F1A15] transition-colors duration-300 hover:border-[#0C3A30]"
           >
             <ChevronLeft size={18} />
           </button>
@@ -109,7 +109,7 @@ export function ProblemsCarousel() {
             type="button"
             onClick={() => scrollByCard(1)}
             aria-label="Siguiente"
-            className="grid h-10 w-10 place-items-center rounded-full border border-[#EBE8DF] bg-white text-[#0F1A15] transition-colors duration-300 hover:border-[#153B2E]"
+            className="grid h-10 w-10 place-items-center rounded-full border border-[#EBE8DF] bg-white text-[#0F1A15] transition-colors duration-300 hover:border-[#0C3A30]"
           >
             <ChevronRight size={18} />
           </button>

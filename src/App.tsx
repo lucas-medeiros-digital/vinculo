@@ -1,30 +1,22 @@
 import { MotionConfig } from 'framer-motion'
+import { Routes, Route } from 'react-router-dom'
 import { DiagnosticFormProvider } from './context/DiagnosticFormContext'
-import { Hero } from './components/Hero'
-import { ProblemsCarousel } from './components/sections/ProblemsCarousel'
-import { WhatIsVinculo } from './components/sections/WhatIsVinculo'
-import { WhyChooseUs } from './components/sections/WhyChooseUs'
-import { OurMethod } from './components/sections/OurMethod'
-import { OurSolutions } from './components/sections/OurSolutions'
-import { Clients } from './components/sections/Clients'
-import { FinalCta } from './components/sections/FinalCta'
-import { FloatingWhatsApp } from './components/FloatingWhatsApp'
+import { Layout } from './components/Layout'
+import { Home } from './pages/Home'
+import { ServicesPage } from './pages/ServicesPage'
+import { ContactPage } from './pages/ContactPage'
 
 function App() {
   return (
     <MotionConfig reducedMotion="user">
       <DiagnosticFormProvider>
-        <main>
-          <Hero />
-          <ProblemsCarousel />
-          <WhatIsVinculo />
-          <WhyChooseUs />
-          <OurMethod />
-          <OurSolutions />
-          <Clients />
-          <FinalCta />
-        </main>
-        <FloatingWhatsApp />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/servicios" element={<ServicesPage />} />
+            <Route path="/contacto" element={<ContactPage />} />
+          </Route>
+        </Routes>
       </DiagnosticFormProvider>
     </MotionConfig>
   )

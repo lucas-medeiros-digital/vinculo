@@ -10,8 +10,15 @@ import {
   cardHoverClasses,
 } from '../ui/motion'
 
-const PARAGRAPH =
-  'Somos la agencia que se sienta con vos a entender tu negocio antes de proponer una sola acción. Diseñamos estrategias digitales integrales, pensadas para el momento de tu empresa.'
+const PARAGRAPH = (
+  <>
+    Antes de proponer una sola acción, creamos un{' '}
+    <span className="font-fraunces italic text-[#0C3A30]">vínculo</span> real con
+    tu negocio: nos sentamos con vos a entenderlo de verdad. De esa relación
+    nacen estrategias digitales integrales, pensadas para escalar lo que ya
+    funciona.
+  </>
+)
 
 interface Pillar {
   icon: LucideIcon
@@ -70,8 +77,8 @@ export function WhatIsVinculo() {
         {/* Centered button below the grid */}
         <Reveal className="mt-10 flex justify-center sm:mt-12">
           <HoverRollButton
-            text="Conocé nuestro método"
-            href="#metodo"
+            text="Conocé nuestras soluciones"
+            href="#soluciones"
             className="bg-[#C8A45A] py-2.5 pl-5 text-[#0F1A15] hover:bg-[#B8942F]"
             textClassName="text-[13px] sm:text-[14px]"
             circleClassName="w-8 h-8 bg-[#F7F5F0]"
@@ -89,8 +96,8 @@ function PillarCard({ icon: Icon, title, body }: Pillar) {
       whileHover={CARD_HOVER}
       className={`group flex h-full flex-col items-center rounded-xl border border-[#EBE8DF] bg-[#F7F5F0] p-8 text-center sm:rounded-2xl ${cardHoverClasses}`}
     >
-      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#153B2E] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#C8A45A]">
-        <Icon size={20} className="text-[#F7F5F0] transition-colors duration-300 group-hover:text-[#153B2E]" />
+      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#0C3A30] transition-all duration-300 group-hover:rotate-6 group-hover:bg-[#C8A45A]">
+        <Icon size={20} className="text-[#F7F5F0] transition-colors duration-300 group-hover:text-[#0C3A30]" />
       </span>
       <h3 className="mb-2 mt-4 font-fraunces text-[20px] font-medium leading-tight text-[#0F1A15] sm:text-[22px]">
         {title}
