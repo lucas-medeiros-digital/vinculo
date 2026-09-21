@@ -1,13 +1,15 @@
 import { type ReactNode } from 'react'
 import {
-  Megaphone,
+  Facebook,
+  Search,
   Globe,
   ShoppingBag,
   Palette,
   MessageCircle,
   Check,
   ArrowRight,
-  Search,
+  Heart,
+  Send,
   PenTool,
   Rocket,
   LineChart,
@@ -31,20 +33,36 @@ interface Service {
 
 const SERVICES: Service[] = [
   {
-    icon: Megaphone,
+    icon: Facebook,
     serviceId: IMPROVE_IDS.publicidad,
-    name: 'Publicidad digital',
-    tagline: 'Campañas que convierten',
+    name: 'Meta Ads',
+    tagline: 'Facebook + Instagram',
     description:
-      'Diseñamos y gestionamos campañas de Meta Ads, Google Ads y Mercado Ads con foco en ventas reales. Optimizamos semana a semana para bajar el costo por cliente y escalar lo que funciona.',
+      'Creamos y gestionamos campañas en Facebook e Instagram: feed, stories y reels. Segmentación fina, creatividades que frenan el scroll y optimización constante hacia ventas — no likes.',
     bullets: [
-      'Meta Ads (Facebook + Instagram)',
-      'Google Ads (Search, Display, YouTube)',
-      'Mercado Ads y remarketing',
-      'Optimización semanal y reportes claros',
-      'Enfoque en conversión y ROAS',
+      'Campañas de conversión, tráfico y mensajes',
+      'Segmentación por intereses, lookalikes y retargeting',
+      'Creatividades y copys para feed, stories y reels',
+      'Píxel y eventos configurados correctamente',
+      'Optimización semanal enfocada en ROAS',
     ],
-    visual: <AdsVisual />,
+    visual: <MetaAdVisual />,
+  },
+  {
+    icon: Search,
+    serviceId: IMPROVE_IDS.publicidad,
+    name: 'Google Ads',
+    tagline: 'Search, Display y YouTube',
+    description:
+      'Aparecé justo cuando te buscan. Campañas de búsqueda, display y YouTube pensadas para captar demanda real y bajar el costo por cliente.',
+    bullets: [
+      'Campañas de Search para captar demanda activa',
+      'Display y remarketing para volver a impactar',
+      'Anuncios en YouTube',
+      'Investigación de palabras clave y negativas',
+      'Seguimiento de conversiones y optimización',
+    ],
+    visual: <GoogleAdVisual />,
   },
   {
     icon: Globe,
@@ -92,7 +110,7 @@ const SERVICES: Service[] = [
       'Fotografía de producto (según proyecto)',
       'Copywriting alineado a tu voz de marca',
     ],
-    visual: <ContentVisual />,
+    visual: <ReelVisual />,
   },
   {
     icon: MessageCircle,
@@ -296,28 +314,69 @@ function Chip({ children, className = '' }: { children: ReactNode; className?: s
   )
 }
 
-function AdsVisual() {
-  const bars = [45, 60, 52, 74, 88, 100]
+/** Facebook/Instagram feed ad card (original placeholder brand). */
+function MetaAdVisual() {
   return (
     <VisualShell>
-      <div className="flex h-full flex-col rounded-xl bg-[#F7F5F0] p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="h-2.5 w-20 rounded bg-[#0C3A30]/60" />
-          <div className="rounded-full bg-[#0C3A30] px-2.5 py-1 text-[10px] font-bold text-[#C8A45A]">
-            ROAS 4.2x
+      <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white">
+        <div className="flex items-center gap-2 p-2.5">
+          <span className="h-7 w-7 rounded-full bg-[#0C3A30]" />
+          <div className="flex-1">
+            <div className="h-2 w-16 rounded bg-[#0C3A30]/70" />
+            <div className="mt-1 h-1.5 w-10 rounded bg-black/15" />
           </div>
+          <span className="text-[14px] leading-none text-black/30">···</span>
         </div>
-        <div className="flex flex-1 items-end gap-2">
-          {bars.map((h, i) => (
-            <div
-              key={i}
-              className={`flex-1 rounded-t ${i === bars.length - 1 ? 'bg-[#C8A45A]' : 'bg-[#0C3A30]/35'}`}
-              style={{ height: `${h}%` }}
-            />
-          ))}
+        <div className="relative flex-1 bg-gradient-to-br from-[#C8A45A]/25 to-[#0C3A30]/15">
+          <span className="absolute left-2 top-2 rounded bg-[#0C3A30] px-1.5 py-0.5 text-[8px] font-bold text-[#C8A45A]">
+            OFERTA
+          </span>
+          <div className="absolute bottom-2 left-2 h-8 w-8 rounded-full bg-white/70" />
+        </div>
+        <div className="flex items-center justify-between bg-[#F7F5F0] p-2.5">
+          <div>
+            <div className="h-1.5 w-14 rounded bg-black/20" />
+            <div className="mt-1 h-2 w-20 rounded bg-[#0C3A30]/70" />
+          </div>
+          <span className="rounded bg-black/10 px-2 py-1 text-[8px] font-semibold text-black/60">
+            Más info
+          </span>
         </div>
       </div>
-      <Chip className="-right-2 top-6">📈 +38% conversiones</Chip>
+      <Chip className="-right-2 top-6">
+        <Heart size={12} className="text-[#C8A45A]" /> +2.1k alcance
+      </Chip>
+    </VisualShell>
+  )
+}
+
+/** Google search sponsored result (original placeholder brand). */
+function GoogleAdVisual() {
+  return (
+    <VisualShell>
+      <div className="flex h-full flex-col justify-center rounded-xl bg-white p-4">
+        <span className="mb-2 font-jakarta text-[9px] font-bold text-black/50">Patrocinado</span>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="grid h-6 w-6 place-items-center rounded-full bg-[#0C3A30]/10">
+            <Globe size={12} className="text-[#0C3A30]" />
+          </span>
+          <div>
+            <div className="h-1.5 w-24 rounded bg-black/60" />
+            <div className="mt-1 h-1.5 w-16 rounded bg-black/20" />
+          </div>
+        </div>
+        <div className="mb-2 space-y-1.5">
+          <div className="h-2.5 w-4/5 rounded bg-[#1a56db]" />
+          <div className="h-2.5 w-3/5 rounded bg-[#1a56db]" />
+        </div>
+        <div className="space-y-1">
+          <div className="h-1.5 w-full rounded bg-black/15" />
+          <div className="h-1.5 w-5/6 rounded bg-black/15" />
+        </div>
+      </div>
+      <Chip className="-left-2 bottom-6">
+        <Search size={12} className="text-[#C8A45A]" /> CTR 6.2%
+      </Chip>
     </VisualShell>
   )
 }
@@ -365,17 +424,25 @@ function StoreVisual() {
   )
 }
 
-function ContentVisual() {
+/** Instagram-reel style phone (original, abstract — no photos). */
+function ReelVisual() {
   return (
     <VisualShell>
-      <div className="grid h-full grid-cols-3 gap-2.5">
-        <div className="col-span-2 row-span-2 rounded-xl bg-gradient-to-br from-[#C8A45A]/80 to-[#C8A45A]/30" />
-        <div className="rounded-xl bg-[#F7F5F0]/90" />
-        <div className="rounded-xl bg-[#F7F5F0]/60" />
-        <div className="rounded-xl bg-[#F7F5F0]/80" />
-        <div className="rounded-xl bg-[#F7F5F0]/40" />
+      <div className="mx-auto flex h-full w-40 flex-col overflow-hidden rounded-[1.5rem] border-4 border-[#04120e] bg-[#0b1f1a]">
+        <div className="relative flex-1 bg-gradient-to-br from-[#C8A45A]/40 via-[#0C3A30] to-[#061d18]">
+          <span className="absolute left-2 top-2 font-jakarta text-[9px] font-bold text-white">Reels</span>
+          <div className="absolute right-2 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 text-white">
+            <Heart size={16} />
+            <MessageCircle size={16} />
+            <Send size={16} />
+          </div>
+          <div className="absolute bottom-2 left-2 right-8">
+            <div className="mb-1 h-1.5 w-3/4 rounded bg-white/70" />
+            <div className="h-1.5 w-1/2 rounded bg-white/40" />
+          </div>
+        </div>
       </div>
-      <Chip className="-left-2 bottom-5">🎨 +2.4k alcance</Chip>
+      <Chip className="-left-2 bottom-6">🎬 +5.4k reproducciones</Chip>
     </VisualShell>
   )
 }

@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
-import { Clock, Menu, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Clock, Menu, X, ArrowUpRight } from 'lucide-react'
 import { HoverRollButton } from './ui/HoverRollButton'
 import { useMontevideoTime } from '../hooks/useMontevideoTime'
 import { NAV_LINKS, openCalendly } from '../lib/constants'
@@ -54,11 +56,12 @@ export function Navbar() {
           {/* MOBILE toggle */}
           <button
             type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Abrir menú"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C3A30] text-white md:hidden"
           >
-            <Menu size={18} />
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </nav>
       </div>
@@ -75,67 +78,97 @@ interface MobileMenuProps {
 }
 
 function MobileMenu({ open, time, onClose }: MobileMenuProps) {
-  return (
-    <div
-      className={`fixed inset-0 z-50 md:hidden ${open ? '' : 'pointer-events-none'}`}
-      aria-hidden={!open}
-    >
-      {/* Backdrop */}
-      <div
-        onClick={onClose}
-        className={`absolute inset-0 bg-black/60 transition-opacity duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-          open ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+  // Lock body scroll while open.
+  useEffect(() => {
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [open])
 
-      {/* Bottom sheet */}
-      <div
-        className={`absolute inset-x-3 bottom-3 rounded-2xl bg-[#F7F5F0] p-6 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-          open ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      >
-        <div className="mb-6 flex items-center justify-between">
-          <span className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-[13px] text-gray-600">
-            <Clock size={14} />
-            {time} en Montevideo
-          </span>
-          <button
-            type="button"
+  const EASE = [0.32, 0.72, 0, 1] as const
+
+  return createPortal(
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-[100] md:hidden">
+          {/* Backdrop */}
+          <motion.div
             onClick={onClose}
-            aria-label="Cerrar menú"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C3A30] text-white"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={onClose}
-              className="font-fraunces text-[28px] font-medium leading-[32px] text-[#0F1A15]"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <HoverRollButton
-            text="Agendá una reunión"
-            onClick={() => {
-              onClose()
-              openCalendly()
-            }}
-            className="w-full justify-between bg-[#0C3A30] py-3 pl-6 pr-2 text-white hover:bg-[#0A2E26]"
-            textClassName="text-[15px]"
-            circleClassName="w-8 h-8 bg-[#F7F5F0]"
-            arrowClassName="w-4 h-4 text-[#0C3A30]"
+            className="absolute inset-0 bg-[#061d18]/60 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           />
+
+          {/* Top-right panel */}
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            className="absolute right-3 top-3 w-[min(20rem,calc(100vw-1.5rem))] overflow-hidden rounded-2xl bg-[#F7F5F0] shadow-[0_24px_60px_rgba(6,29,24,0.4)]"
+            style={{ transformOrigin: 'top right' }}
+            initial={{ opacity: 0, scale: 0.9, y: -12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: -12 }}
+            transition={{ duration: 0.28, ease: EASE }}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-black/5 px-5 py-4">
+              <span className="flex items-center gap-1.5 font-jakarta text-[13px] text-gray-500">
+                <Clock size={14} />
+                {time} en Montevideo
+              </span>
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Cerrar menú"
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0C3A30] text-white"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Links */}
+            <nav className="flex flex-col px-2 py-2">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={onClose}
+                  className="group flex items-center justify-between rounded-xl px-3 py-3 transition-colors hover:bg-white"
+                >
+                  <span className="font-fraunces text-[22px] font-medium text-[#0F1A15]">
+                    {link.label}
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    className="text-[#C8A45A] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA */}
+            <div className="px-4 pb-4 pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  onClose()
+                  openCalendly()
+                }}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0C3A30] px-6 py-3.5 font-jakarta text-[15px] font-semibold text-white transition-colors hover:bg-[#0A2E26]"
+              >
+                Agendá una reunión
+                <ArrowUpRight size={18} className="text-[#C8A45A]" />
+              </button>
+            </div>
+          </motion.div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>,
+    document.body,
   )
 }
