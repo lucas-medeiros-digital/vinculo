@@ -6,6 +6,7 @@ import { WHATSAPP_URL, openCalendly } from '../lib/constants'
 const NAV = [
   { label: 'Inicio', to: '/' },
   { label: 'Servicios', to: '/servicios' },
+  { label: 'Nosotros', to: '/quienes-somos' },
   { label: 'Clientes', to: '/#clientes' },
   { label: 'Contacto', to: '/contacto' },
 ]
@@ -79,10 +80,16 @@ export function Footer() {
               <MessageCircle size={16} className="text-[#C8A45A]" /> WhatsApp
             </a>
             <a
-              href="mailto:hola@vinculo.uy"
+              href="mailto:lucas@vinculo.uy"
               className="flex items-center gap-2 font-jakarta text-[14px] text-[#F7F5F0]/80 transition-colors hover:text-[#F7F5F0]"
             >
-              <Mail size={16} className="text-[#C8A45A]" /> hola@vinculo.uy
+              <Mail size={16} className="text-[#C8A45A]" /> lucas@vinculo.uy
+            </a>
+            <a
+              href="mailto:matias@vinculo.uy"
+              className="flex items-center gap-2 font-jakarta text-[14px] text-[#F7F5F0]/80 transition-colors hover:text-[#F7F5F0]"
+            >
+              <Mail size={16} className="text-[#C8A45A]" /> matias@vinculo.uy
             </a>
             <a
               href="https://www.linkedin.com/company/vinculo"

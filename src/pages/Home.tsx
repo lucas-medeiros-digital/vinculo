@@ -5,6 +5,7 @@ import { WhyChooseUs } from '../components/sections/WhyChooseUs'
 import { PopularServices } from '../components/sections/PopularServices'
 import { OurSolutions } from '../components/sections/OurSolutions'
 import { Clients } from '../components/sections/Clients'
+import { AboutTeaser } from '../components/sections/AboutTeaser'
 import { FinalCta } from '../components/sections/FinalCta'
 
 export function Home() {
@@ -17,6 +18,7 @@ export function Home() {
       <PopularServices />
       <OurSolutions />
       <Clients />
+      <AboutTeaser />
       <FinalCta />
     </>
   )

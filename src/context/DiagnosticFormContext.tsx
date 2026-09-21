@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { FORM_TO_EMAIL } from '../lib/constants'
 
 /** Stable ids for the Step 1 "¿Qué querés mejorar?" options. Shared between the
  * form (Section 8) and the solutions catalog (Section 6) so a service panel can
@@ -114,8 +115,25 @@ export function DiagnosticFormProvider({ children }: { children: ReactNode }) {
 
   const submit = useCallback(() => {
     setSubmitting(true)
-    // Endpoint not wired yet — simulate a successful submission.
-    // TODO(dev): POST `data` to /api/diagnostico (backend/webhook).
+    // Interim delivery via the visitor's mail client (no backend yet).
+    // TODO(dev): replace with a form service (Netlify Forms / Formspree).
+    const subject = `Nueva solicitud de diagnóstico — ${data.nombre || 'Vínculo'}`
+    const body = [
+      `Nombre: ${data.nombre}`,
+      `Empresa: ${data.empresa || '-'}`,
+      `WhatsApp: ${data.countryCode} ${data.whatsapp}`,
+      `Email: ${data.email}`,
+      '',
+      `Qué quiere mejorar: ${data.improve.join(', ') || '-'}`,
+      `Rubro: ${data.rubro || '-'}`,
+      `Ya invierte en publicidad: ${data.invierte || '-'}`,
+      '',
+      `Mensaje: ${data.mensaje || '-'}`,
+    ].join('\n')
+    window.location.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`
+
     window.setTimeout(() => {
       setSubmitting(false)
       setSubmitted(true)
@@ -125,7 +143,7 @@ export function DiagnosticFormProvider({ children }: { children: ReactNode }) {
         /* ignore */
       }
     }, 900)
-  }, [])
+  }, [data])
 
   return (
     <DiagnosticFormContext.Provider

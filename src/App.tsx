@@ -4,6 +4,7 @@ import { DiagnosticFormProvider } from './context/DiagnosticFormContext'
 import { Layout } from './components/Layout'
 import { Home } from './pages/Home'
 import { ServicesPage } from './pages/ServicesPage'
+import { AboutPage } from './pages/AboutPage'
 import { ContactPage } from './pages/ContactPage'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/servicios" element={<ServicesPage />} />
+            <Route path="/quienes-somos" element={<AboutPage />} />
             <Route path="/contacto" element={<ContactPage />} />
           </Route>
         </Routes>

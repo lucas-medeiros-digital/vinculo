@@ -3,7 +3,7 @@ import { Video, Mail, MessageCircle, MapPin, Linkedin, Instagram, Check, ArrowRi
 import { Navbar } from '../components/Navbar'
 import { IsoV3D } from '../components/IsoV3D'
 import { Reveal } from '../components/ui/motion'
-import { openCalendly, WHATSAPP_URL } from '../lib/constants'
+import { openCalendly, WHATSAPP_URL, FORM_TO_EMAIL } from '../lib/constants'
 
 const inputClasses =
   'w-full rounded-xl border border-[#EBE8DF] bg-white px-4 py-3 font-jakarta text-[14px] transition focus:border-[#0C3A30] focus:outline-none focus:ring-2 focus:ring-[#0C3A30]/10'
@@ -79,9 +79,14 @@ export function ContactPage() {
       <section className="bg-[#072620] px-5 py-16 sm:px-8 sm:py-20 lg:px-12">
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <InfoItem icon={<Mail size={20} className="text-[#C8A45A]" />} title="Email">
-            <a href="mailto:hola@vinculo.uy" className="hover:text-[#F7F5F0]">
-              hola@vinculo.uy
-            </a>
+            <div className="flex flex-col gap-1">
+              <a href="mailto:lucas@vinculo.uy" className="hover:text-[#F7F5F0]">
+                lucas@vinculo.uy
+              </a>
+              <a href="mailto:matias@vinculo.uy" className="hover:text-[#F7F5F0]">
+                matias@vinculo.uy
+              </a>
+            </div>
           </InfoItem>
           <InfoItem icon={<MessageCircle size={20} className="text-[#C8A45A]" />} title="WhatsApp">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#F7F5F0]">
@@ -125,8 +130,13 @@ function ContactForm() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!valid) return
-    // Endpoint not wired yet — simulate a successful send.
-    // TODO(dev): POST to backend / email service.
+    // Interim delivery via the visitor's mail client (no backend yet).
+    // TODO(dev): replace with a form service (Netlify Forms / Formspree).
+    const subject = `Nuevo mensaje de ${data.nombre} — Vínculo`
+    const body = `Nombre: ${data.nombre}\nEmail: ${data.email}\n\nMensaje:\n${data.mensaje}`
+    window.location.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`
     setSent(true)
   }
 
