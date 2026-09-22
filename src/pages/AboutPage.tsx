@@ -1,5 +1,4 @@
 import { TrendingUp, Eye, Users, BarChart3, ArrowRight, type LucideIcon } from 'lucide-react'
-import { Navbar } from '../components/Navbar'
 import { ToolsStrip } from '../components/ToolsStrip'
 import { Reveal, StaggerGroup, StaggerItem, AnimatedUnderline } from '../components/ui/motion'
 import { openCalendly } from '../lib/constants'
@@ -37,11 +36,8 @@ export function AboutPage() {
   return (
     <div>
       {/* HEADER */}
-      <section className="relative overflow-hidden bg-[#0C3A30] px-5 pb-16 pt-10 sm:px-8 sm:pb-20 lg:px-12 lg:pb-24 lg:pt-14">
-        <div className="mx-auto max-w-[1440px]">
-          <Navbar />
-        </div>
-        <div className="mx-auto mt-6 max-w-3xl text-center sm:mt-10">
+      <section className="relative overflow-hidden bg-[#0C3A30] px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-32 lg:px-12 lg:pb-24">
+        <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="font-jakarta text-[13px] font-medium uppercase tracking-[0.2em] text-[#C8A45A]">
               Quiénes somos

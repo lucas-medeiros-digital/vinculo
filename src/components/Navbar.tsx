@@ -12,16 +12,16 @@ export function Navbar() {
   const time = useMontevideoTime()
 
   return (
-    <header className="relative z-20">
+    <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto max-w-[1440px] p-2 sm:p-3">
-        <nav className="flex items-center justify-between rounded-full bg-white p-[5px] pl-[5px]">
+        <nav className="flex items-center justify-between rounded-full bg-white p-[5px] pl-[5px] shadow-[0_6px_24px_rgba(6,29,24,0.12)]">
           {/* LEFT: logo + nav links */}
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center pl-2" aria-label="Vínculo — inicio">
               <img
                 src="/logos/vinculo-horizontal-green.png"
                 alt="Vínculo — Growth Marketing"
-                className="h-7 w-auto sm:h-8"
+                className="h-9 w-auto sm:h-8"
               />
             </Link>
             <div className="hidden items-center gap-6 md:flex">
@@ -59,9 +59,9 @@ export function Navbar() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0C3A30] text-white md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#0C3A30] text-white md:hidden"
           >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
       </div>

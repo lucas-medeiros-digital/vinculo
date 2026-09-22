@@ -1,6 +1,5 @@
 import { useState, type ReactNode, type FormEvent } from 'react'
 import { Video, Mail, MessageCircle, MapPin, Linkedin, Instagram, Check, ArrowRight } from 'lucide-react'
-import { Navbar } from '../components/Navbar'
 import { IsoV3D } from '../components/IsoV3D'
 import { Reveal } from '../components/ui/motion'
 import { openCalendly, WHATSAPP_URL, FORM_TO_EMAIL } from '../lib/constants'
@@ -13,8 +12,7 @@ export function ContactPage() {
     <div>
       {/* HEADER */}
       <section className="relative overflow-hidden bg-[#0C3A30]">
-        <Navbar />
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_340px] lg:px-12 lg:pb-24 lg:pt-14">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-32 lg:grid-cols-[1fr_340px] lg:px-12 lg:pb-24">
           <Reveal>
             <p className="font-jakarta text-[13px] font-medium uppercase tracking-[0.2em] text-[#C8A45A]">
               Contacto

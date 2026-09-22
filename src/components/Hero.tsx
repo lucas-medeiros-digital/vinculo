@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { HeroShader } from './HeroShader'
-import { Navbar } from './Navbar'
 import { IsoV3D } from './IsoV3D'
 import { HoverRollButton } from './ui/HoverRollButton'
 import { staggerContainer, fadeUpItem } from './ui/motion'
@@ -9,9 +8,6 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#F7F5F0]">
       <HeroShader />
-
-      {/* Navigation lives inside the hero so it floats over the shader */}
-      <Navbar />
 
       {/* Interactive 3D "V" — absolutely placed so it never reflows the content.
           Mobile: centered in the blank space above the headline.

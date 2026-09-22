@@ -15,7 +15,6 @@ import {
   LineChart,
   type LucideIcon,
 } from 'lucide-react'
-import { Navbar } from '../components/Navbar'
 import { TiltLogo } from '../components/Logo3D'
 import { Reveal, StaggerGroup, StaggerItem } from '../components/ui/motion'
 import { useDiagnosticForm, IMPROVE_IDS } from '../context/DiagnosticFormContext'
@@ -142,8 +141,7 @@ export function ServicesPage() {
     <div>
       {/* HEADER */}
       <section className="relative overflow-hidden bg-[#0C3A30]">
-        <Navbar />
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-10 sm:px-8 sm:pb-20 lg:grid-cols-[1fr_360px] lg:px-12 lg:pb-24 lg:pt-14">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-16 pt-28 sm:px-8 sm:pb-20 sm:pt-32 lg:grid-cols-[1fr_360px] lg:px-12 lg:pb-24">
           <Reveal>
             <p className="font-jakarta text-[13px] font-medium uppercase tracking-[0.2em] text-[#C8A45A]">
               Nuestros servicios
