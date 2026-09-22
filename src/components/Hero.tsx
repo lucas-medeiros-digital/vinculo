@@ -6,7 +6,7 @@ import { staggerContainer, fadeUpItem } from './ui/motion'
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#F7F5F0]">
+    <section className="relative flex min-h-[640px] h-screen max-h-[900px] flex-col overflow-hidden bg-[#F7F5F0]">
       <HeroShader />
 
       {/* Interactive 3D "V" — absolutely placed so it never reflows the content.
