@@ -27,17 +27,17 @@
 
     <style>
       :root {
-        --bg: #0a0906;
-        --bg-2: #13110c;
+        --bg: #06130e;
+        --bg-2: #0b1d16;
         --card: rgba(255, 255, 255, 0.025);
-        --accent: #c8a45a;
-        --accent-soft: #dcc083;
-        --text: #f6f4ef;
-        --muted: rgba(246, 244, 239, 0.56);
-        --muted-2: rgba(246, 244, 239, 0.38);
+        --accent: #4fbf8c;
+        --accent-soft: #76d6a6;
+        --text: #eef5f1;
+        --muted: rgba(238, 245, 241, 0.56);
+        --muted-2: rgba(238, 245, 241, 0.38);
         --line: rgba(255, 255, 255, 0.1);
         --line-2: rgba(255, 255, 255, 0.16);
-        --up: #5fcf8e;
+        --up: #6fe0a3;
         --radius: 18px;
         --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
       }
@@ -50,12 +50,15 @@
       header { position: sticky; top: 0; z-index: 50; background: rgba(10, 9, 6, 0.7); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
       .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
       .nav img { height: 28px; width: auto; }
-      .nav-cta { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; color: #231a06; background: var(--accent); padding: 10px 18px; border-radius: 999px; transition: background 0.25s var(--ease), transform 0.2s var(--ease); }
+      .nav-cta { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; color: #04140d; background: var(--accent); padding: 10px 18px; border-radius: 999px; transition: background 0.25s var(--ease), transform 0.2s var(--ease); }
       .nav-cta:hover { background: var(--accent-soft); transform: translateY(-1px); }
 
       .hero { position: relative; text-align: center; padding: 96px 0 72px; overflow: hidden; }
-      .hero::before { content: ''; position: absolute; inset: -20% 0 auto 0; height: 600px; background: radial-gradient(ellipse 60% 70% at 50% 28%, rgba(200, 164, 90, 0.16), transparent 70%); pointer-events: none; z-index: 0; animation: glow 8s ease-in-out infinite; }
+      .hero::before { content: ''; position: absolute; inset: -20% 0 auto 0; height: 600px; background: radial-gradient(ellipse 60% 70% at 50% 28%, rgba(79, 191, 140, 0.16), transparent 70%); pointer-events: none; z-index: 0; animation: glow 8s ease-in-out infinite; }
       @keyframes glow { 0%,100%{opacity:.8} 50%{opacity:1} }
+      .v-glyph { position: absolute; top: 72px; left: 50%; transform: translateX(-50%); width: 300px; height: auto; opacity: 0.08; z-index: 0; pointer-events: none; fill: var(--accent); animation: floaty 6.5s var(--ease) infinite; }
+      @keyframes floaty { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-16px); } }
+      .bullets svg { stroke: var(--accent); }
       .hero > .wrap { position: relative; z-index: 1; }
       .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted-2); }
       .eyebrow .sep { color: var(--accent); margin: 0 6px; }
@@ -64,8 +67,8 @@
       .lead { margin: 24px auto 0; max-width: 52ch; font-size: clamp(1rem, 2.3vw, 1.18rem); color: var(--muted); }
       .cta-row { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; }
       .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 999px; cursor: pointer; transition: transform 0.2s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease); }
-      .btn-primary { background: var(--accent); color: #231a06; border: 1px solid var(--accent); }
-      .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(200, 164, 90, 0.26); }
+      .btn-primary { background: var(--accent); color: #04140d; border: 1px solid var(--accent); }
+      .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(79, 191, 140, 0.26); }
       .btn-primary svg { transition: transform 0.25s var(--ease); }
       .btn-primary:hover svg { transform: translateX(3px); }
       .btn-text { color: var(--text); font-weight: 600; font-size: 15px; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: border-color 0.2s var(--ease); }
@@ -101,24 +104,24 @@
       .metric .v { font-family: 'Fraunces', serif; font-size: 24px; margin-top: 6px; }
       .metric .d { font-size: 11px; color: var(--up); margin-top: 2px; }
       .bars { margin-top: 16px; display: flex; align-items: flex-end; gap: 7px; height: 56px; }
-      .bars i { flex: 1; background: linear-gradient(180deg, var(--accent), rgba(200,164,90,0.25)); border-radius: 4px 4px 0 0; }
+      .bars i { flex: 1; background: linear-gradient(180deg, var(--accent), rgba(79,191,140,0.22)); border-radius: 4px 4px 0 0; }
 
       /* Browser mock */
       .browser { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 4px; }
       .browser-bar { display: flex; align-items: center; gap: 6px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--line); }
       .browser-bar i { width: 10px; height: 10px; border-radius: 50%; }
       .browser-url { margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 6px; flex: 1; }
-      .browser-body { padding: 26px 22px 30px; background: linear-gradient(180deg, rgba(200,164,90,0.06), transparent); }
-      .browser-body .bt { height: 13px; border-radius: 6px; background: rgba(246,244,239,0.8); width: 72%; }
-      .browser-body .bt.s { width: 54%; margin-top: 9px; background: rgba(246,244,239,0.5); }
-      .browser-body .bb { margin-top: 18px; display: inline-block; background: var(--accent); color: #231a06; font-size: 12px; font-weight: 700; padding: 9px 16px; border-radius: 999px; }
+      .browser-body { padding: 26px 22px 30px; background: linear-gradient(180deg, rgba(79,191,140,0.07), transparent); }
+      .browser-body .bt { height: 13px; border-radius: 6px; background: rgba(238,245,241,0.8); width: 72%; }
+      .browser-body .bt.s { width: 54%; margin-top: 9px; background: rgba(238,245,241,0.5); }
+      .browser-body .bb { margin-top: 18px; display: inline-block; background: var(--accent); color: #04140d; font-size: 12px; font-weight: 700; padding: 9px 16px; border-radius: 999px; }
 
       /* IG content mock */
       .ig-head { display: flex; align-items: center; gap: 10px; }
-      .ig-ava { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #8a6a28); display: grid; place-items: center; font-weight: 700; color: #231a06; font-size: 14px; }
+      .ig-ava { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #1d6b45); display: grid; place-items: center; font-weight: 700; color: #04140d; font-size: 14px; }
       .ig-name { font-size: 13px; font-weight: 600; }
       .ig-sub { font-size: 11px; color: var(--muted-2); }
-      .ig-img { margin-top: 14px; height: 150px; border-radius: 10px; background: linear-gradient(135deg, #1d2a24, #2a2416 60%, #3a2f18); display: grid; place-items: center; color: var(--muted-2); font-size: 12px; letter-spacing: 0.1em; }
+      .ig-img { margin-top: 14px; height: 150px; border-radius: 10px; background: linear-gradient(135deg, #0e241b, #123a2a 60%, #19543c); display: grid; place-items: center; color: var(--muted-2); font-size: 12px; letter-spacing: 0.1em; }
       .ig-actions { margin-top: 12px; display: flex; gap: 16px; color: var(--text); }
       .ig-likes { margin-top: 8px; font-size: 13px; font-weight: 600; }
       .ig-cap { margin-top: 4px; font-size: 13px; color: var(--muted); }
@@ -131,7 +134,7 @@
 
       .pills { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
       .pill-i { font-size: 13.5px; color: var(--text); border: 1px solid var(--line-2); background: var(--card); padding: 9px 16px; border-radius: 999px; transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease); }
-      .pill-i:hover { border-color: var(--accent); background: rgba(200,164,90,0.08); transform: translateY(-2px); }
+      .pill-i:hover { border-color: var(--accent); background: rgba(79,191,140,0.08); transform: translateY(-2px); }
 
       .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 44px; }
       .stat .n { font-family: 'Fraunces', Georgia, serif; font-weight: 500; color: var(--accent); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; }
@@ -144,7 +147,7 @@
       .step h4 { font-size: 16px; margin-top: 12px; }
       .step p { margin-top: 8px; font-size: 14px; color: var(--muted); }
 
-      .cta-band { text-align: center; border: 1px solid var(--line); border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, rgba(200,164,90,0.14), transparent 70%), var(--bg-2); padding: 56px 24px; }
+      .cta-band { text-align: center; border: 1px solid var(--line); border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, rgba(79,191,140,0.14), transparent 70%), var(--bg-2); padding: 56px 24px; }
       .cta-band h2 { max-width: 20ch; margin-inline: auto; }
       .cta-band .cta-row { margin-top: 28px; }
 
@@ -194,6 +197,9 @@
     </header>
 
     <section class="hero">
+      <svg class="v-glyph" viewBox="0 0 311 320" aria-hidden="true">
+        <path d="M 31.752 4.495 C 8.067 31.923, -3.715 68.435, 1.490 98.281 C 4.262 114.181, 5.846 117.137, 66.797 220.166 L 125.561 319.500 173.720 319.760 L 221.880 320.019 230.820 302.260 C 255.118 253.992, 258.328 233.604, 246.208 204.500 C 241.274 192.651, 222.666 164, 219.905 164 C 219.507 164, 208.903 181.958, 196.341 203.907 C 183.778 225.856, 173.173 243.506, 172.773 243.130 C 172.373 242.754, 141.620 188.233, 104.433 121.973 C 67.245 55.713, 36.522 1.197, 36.160 0.827 C 35.797 0.457, 33.813 2.108, 31.752 4.495 M 214.663 7.250 C 205.915 22.606, 186.922 60.432, 185.666 65 C 182.293 77.263, 182.840 91.309, 187.063 100.894 C 189.711 106.901, 218.345 158.973, 219.010 158.988 C 219.290 158.995, 240.058 123.900, 265.161 81 L 310.803 3 263.944 3 L 217.084 3 214.663 7.250" fill-rule="evenodd"/>
+      </svg>
       <div class="wrap">
         <p class="eyebrow hero-anim" style="--d:.05s">Growth Marketing <span class="sep">·</span> Uruguay</p>
         <h1 class="hero-anim" style="--d:.15s">Publicidad, webs y contenido que <span class="ac">traen clientes</span>.</h1>
@@ -393,7 +399,7 @@
           </div>
         </div>
         <div id="cal" style="margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#f7f5f0" class="reveal">
-          <div class="calendly-inline-widget" style="min-width:320px;height:700px" data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=c8a45a"></div>
+          <div class="calendly-inline-widget" style="min-width:320px;height:700px" data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=2f8f63"></div>
         </div>
       </div>
     </section>

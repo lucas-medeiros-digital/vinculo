@@ -27,11 +27,11 @@
 
     <style>
       :root {
-        --bg: #0a0b0e;
-        --bg-2: #0f1116;
+        --bg: #0a0906;
+        --bg-2: #13110c;
         --card: rgba(255, 255, 255, 0.025);
-        --accent: #8ca4e6;
-        --accent-soft: #adbef0;
+        --accent: #c8a45a;
+        --accent-soft: #dcc083;
         --text: #f3f4f7;
         --muted: rgba(243, 244, 247, 0.56);
         --muted-2: rgba(243, 244, 247, 0.38);
@@ -74,15 +74,19 @@
       .hero { position: relative; text-align: center; padding: 96px 0 72px; overflow: hidden; }
       .hero::before {
         content: ''; position: absolute; inset: -20% 0 auto 0; height: 600px;
-        background: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(140, 164, 230, 0.16), transparent 70%);
+        background: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(200, 164, 90, 0.18), transparent 70%);
         pointer-events: none; z-index: 0;
       }
-      .atom-glyph {
-        position: absolute; top: 120px; left: 50%; transform: translateX(-50%);
-        width: 380px; height: 380px; opacity: 0.1; z-index: 0; pointer-events: none;
-        animation: spin 60s linear infinite;
+      .v-glyph {
+        position: absolute; top: 72px; left: 50%; transform: translateX(-50%);
+        width: 300px; height: auto; opacity: 0.09; z-index: 0; pointer-events: none;
+        fill: var(--accent); animation: floaty 6.5s var(--ease) infinite;
       }
-      @keyframes spin { to { transform: translateX(-50%) rotate(360deg); } }
+      @keyframes floaty {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-16px); }
+      }
+      .bullets svg { stroke: var(--accent); }
       .hero > .wrap { position: relative; z-index: 1; }
       .eyebrow {
         font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
@@ -102,8 +106,8 @@
         padding: 14px 26px; border-radius: 999px; cursor: pointer;
         transition: transform 0.2s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
       }
-      .btn-primary { background: var(--accent); color: #0a0b0e; border: 1px solid var(--accent); box-shadow: 0 0 0 0 rgba(140, 164, 230, 0.5); }
-      .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(140, 164, 230, 0.28); }
+      .btn-primary { background: var(--accent); color: #231a06; border: 1px solid var(--accent); box-shadow: 0 0 0 0 rgba(200, 164, 90, 0.5); }
+      .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(200, 164, 90, 0.28); }
       .btn-primary svg { transition: transform 0.25s var(--ease); }
       .btn-primary:hover svg { transform: translate(3px, -3px); }
       .btn-text { color: var(--text); font-weight: 600; font-size: 15px; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: border-color 0.2s var(--ease); }
@@ -132,14 +136,14 @@
       /* Mock cards */
       .mock { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); padding: 16px; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); }
       .mock-head { display: flex; align-items: center; gap: 10px; padding: 4px 4px 12px; border-bottom: 1px solid var(--line); }
-      .mh-ava { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #5c73c0); display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #0a0b0e; }
+      .mh-ava { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #8a6a28); display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #231a06; }
       .mh-name { font-size: 13.5px; font-weight: 600; }
       .mh-sub { font-size: 11.5px; color: #43c777; display: flex; align-items: center; gap: 5px; }
       .mh-sub::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #43c777; }
       .chat { padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 9px; }
       .bub { max-width: 82%; padding: 9px 12px; border-radius: 13px; font-size: 13px; line-height: 1.4; }
       .bub.in { align-self: flex-start; background: rgba(255,255,255,0.06); border-bottom-left-radius: 4px; }
-      .bub.out { align-self: flex-end; background: rgba(140, 164, 230, 0.16); border: 1px solid rgba(140,164,230,0.25); border-bottom-right-radius: 4px; }
+      .bub.out { align-self: flex-end; background: rgba(200, 164, 90, 0.16); border: 1px solid rgba(200,164,90,0.28); border-bottom-right-radius: 4px; }
       .bub .t { display: block; margin-top: 4px; font-size: 10px; color: var(--muted-2); text-align: right; }
 
       /* Terminal / data mock */
@@ -161,7 +165,7 @@
       /* Integrations */
       .pills { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
       .pill-i { font-size: 13.5px; color: var(--text); border: 1px solid var(--line-2); background: var(--card); padding: 9px 16px; border-radius: 999px; transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease); }
-      .pill-i:hover { border-color: var(--accent); background: rgba(140,164,230,0.08); transform: translateY(-2px); }
+      .pill-i:hover { border-color: var(--accent); background: rgba(200,164,90,0.08); transform: translateY(-2px); }
 
       /* Stats */
       .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 44px; }
@@ -177,7 +181,7 @@
       .step p { margin-top: 8px; font-size: 14px; color: var(--muted); }
 
       /* CTA band */
-      .cta-band { text-align: center; border: 1px solid var(--line); border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, rgba(140,164,230,0.14), transparent 70%), var(--bg-2); padding: 56px 24px; }
+      .cta-band { text-align: center; border: 1px solid var(--line); border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, rgba(200,164,90,0.14), transparent 70%), var(--bg-2); padding: 56px 24px; }
       .cta-band h2 { max-width: 20ch; margin-inline: auto; }
       .cta-band .cta-row { margin-top: 28px; }
 
@@ -231,11 +235,8 @@
 
     <!-- HERO -->
     <section class="hero">
-      <svg class="atom-glyph" viewBox="0 0 200 200" fill="none" stroke="#8ca4e6" stroke-width="1.5" aria-hidden="true">
-        <circle cx="100" cy="100" r="10" fill="#8ca4e6" stroke="none"/>
-        <ellipse cx="100" cy="100" rx="78" ry="30"/>
-        <ellipse cx="100" cy="100" rx="78" ry="30" transform="rotate(60 100 100)"/>
-        <ellipse cx="100" cy="100" rx="78" ry="30" transform="rotate(120 100 100)"/>
+      <svg class="v-glyph" viewBox="0 0 311 320" aria-hidden="true">
+        <path d="M 31.752 4.495 C 8.067 31.923, -3.715 68.435, 1.490 98.281 C 4.262 114.181, 5.846 117.137, 66.797 220.166 L 125.561 319.500 173.720 319.760 L 221.880 320.019 230.820 302.260 C 255.118 253.992, 258.328 233.604, 246.208 204.500 C 241.274 192.651, 222.666 164, 219.905 164 C 219.507 164, 208.903 181.958, 196.341 203.907 C 183.778 225.856, 173.173 243.506, 172.773 243.130 C 172.373 242.754, 141.620 188.233, 104.433 121.973 C 67.245 55.713, 36.522 1.197, 36.160 0.827 C 35.797 0.457, 33.813 2.108, 31.752 4.495 M 214.663 7.250 C 205.915 22.606, 186.922 60.432, 185.666 65 C 182.293 77.263, 182.840 91.309, 187.063 100.894 C 189.711 106.901, 218.345 158.973, 219.010 158.988 C 219.290 158.995, 240.058 123.900, 265.161 81 L 310.803 3 263.944 3 L 217.084 3 214.663 7.250" fill-rule="evenodd"/>
       </svg>
       <div class="wrap">
         <p class="eyebrow hero-anim" style="--d:.05s">Automatización con IA <span class="sep">·</span> Uruguay</p>
@@ -448,7 +449,7 @@
           </div>
         </div>
         <div id="cal" style="margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#f7f5f0" class="reveal">
-          <div class="calendly-inline-widget" style="min-width:320px;height:700px" data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=8ca4e6"></div>
+          <div class="calendly-inline-widget" style="min-width:320px;height:700px" data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=c8a45a"></div>
         </div>
       </div>
     </section>
