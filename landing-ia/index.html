@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="logos/vinculo-isotipo-gold.png" />
+
+    <title>Vínculo IA — Automatización y agentes de IA para tu negocio</title>
+    <meta
+      name="description"
+      content="Construimos IA que opera tu negocio: agentes de WhatsApp y voz, automatizaciones y software a medida. Diseñamos, construimos y operamos — en producción, no pilotos."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Vínculo IA — IA que opera tu negocio" />
+    <meta property="og:description" content="Agentes de IA, automatización y software a medida para pymes y empresas en Uruguay." />
+    <meta property="og:url" content="https://ia.vinculo.uy/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <style>
+      :root {
+        --bg: #0a0b0e;
+        --bg-2: #0f1116;
+        --card: rgba(255, 255, 255, 0.025);
+        --accent: #8ca4e6;
+        --accent-soft: #adbef0;
+        --text: #f3f4f7;
+        --muted: rgba(243, 244, 247, 0.56);
+        --muted-2: rgba(243, 244, 247, 0.38);
+        --line: rgba(255, 255, 255, 0.1);
+        --line-2: rgba(255, 255, 255, 0.16);
+        --radius: 18px;
+        --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+
+      /* Header */
+      header {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(10, 11, 14, 0.7);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+      .nav img { height: 28px; width: auto; }
+      .nav-cta {
+        display: inline-flex; align-items: center; gap: 7px;
+        font-size: 14px; font-weight: 600; color: #0a0b0e;
+        background: var(--accent); padding: 10px 18px; border-radius: 999px;
+        transition: background 0.25s var(--ease), transform 0.2s var(--ease);
+      }
+      .nav-cta:hover { background: var(--accent-soft); transform: translateY(-1px); }
+
+      /* Hero */
+      .hero { position: relative; text-align: center; padding: 96px 0 72px; overflow: hidden; }
+      .hero::before {
+        content: ''; position: absolute; inset: -20% 0 auto 0; height: 600px;
+        background: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(140, 164, 230, 0.16), transparent 70%);
+        pointer-events: none; z-index: 0;
+      }
+      .atom-glyph {
+        position: absolute; top: 120px; left: 50%; transform: translateX(-50%);
+        width: 380px; height: 380px; opacity: 0.1; z-index: 0; pointer-events: none;
+        animation: spin 60s linear infinite;
+      }
+      @keyframes spin { to { transform: translateX(-50%) rotate(360deg); } }
+      .hero > .wrap { position: relative; z-index: 1; }
+      .eyebrow {
+        font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+        color: var(--muted-2);
+      }
+      .eyebrow .sep { color: var(--accent); margin: 0 6px; }
+      h1 {
+        font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.02em;
+        line-height: 1.04; font-size: clamp(2.3rem, 6.5vw, 4.4rem);
+        margin: 22px auto 0; max-width: 15ch;
+      }
+      h1 .ac { color: var(--accent); }
+      .lead { margin: 24px auto 0; max-width: 52ch; font-size: clamp(1rem, 2.3vw, 1.18rem); color: var(--muted); }
+      .cta-row { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; align-items: center; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600;
+        padding: 14px 26px; border-radius: 999px; cursor: pointer;
+        transition: transform 0.2s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+      }
+      .btn-primary { background: var(--accent); color: #0a0b0e; border: 1px solid var(--accent); box-shadow: 0 0 0 0 rgba(140, 164, 230, 0.5); }
+      .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(140, 164, 230, 0.28); }
+      .btn-primary svg { transition: transform 0.25s var(--ease); }
+      .btn-primary:hover svg { transform: translate(3px, -3px); }
+      .btn-text { color: var(--text); font-weight: 600; font-size: 15px; border-bottom: 1px solid var(--line-2); padding-bottom: 2px; transition: border-color 0.2s var(--ease); }
+      .btn-text:hover { border-color: var(--accent); }
+      .mini { margin-top: 44px; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
+      .mini span { margin: 0 8px; }
+
+      /* Sections */
+      section.block { padding: 64px 0; }
+      .sec-eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+      h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.12; font-size: clamp(1.8rem, 4.4vw, 2.7rem); margin-top: 12px; }
+      .sec-head { max-width: 680px; }
+      .sec-head.center { text-align: center; margin-inline: auto; }
+      .sec-head p { margin-top: 16px; font-size: clamp(1rem, 2.2vw, 1.12rem); color: var(--muted); }
+
+      /* Feature rows */
+      .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; padding: 46px 0; border-top: 1px solid var(--line); }
+      .feature:nth-child(even) .feat-media { order: -1; }
+      .feat-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.1em; }
+      .feature h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 500; font-size: clamp(1.5rem, 3.2vw, 2rem); margin-top: 10px; }
+      .feature > div > p { margin-top: 12px; color: var(--muted); font-size: 15.5px; max-width: 42ch; }
+      .bullets { margin-top: 20px; display: flex; flex-direction: column; gap: 11px; }
+      .bullets li { list-style: none; display: flex; gap: 10px; font-size: 14.5px; color: var(--text); }
+      .bullets svg { flex: none; margin-top: 3px; }
+
+      /* Mock cards */
+      .mock { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-2); padding: 16px; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); }
+      .mock-head { display: flex; align-items: center; gap: 10px; padding: 4px 4px 12px; border-bottom: 1px solid var(--line); }
+      .mh-ava { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #5c73c0); display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #0a0b0e; }
+      .mh-name { font-size: 13.5px; font-weight: 600; }
+      .mh-sub { font-size: 11.5px; color: #43c777; display: flex; align-items: center; gap: 5px; }
+      .mh-sub::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #43c777; }
+      .chat { padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 9px; }
+      .bub { max-width: 82%; padding: 9px 12px; border-radius: 13px; font-size: 13px; line-height: 1.4; }
+      .bub.in { align-self: flex-start; background: rgba(255,255,255,0.06); border-bottom-left-radius: 4px; }
+      .bub.out { align-self: flex-end; background: rgba(140, 164, 230, 0.16); border: 1px solid rgba(140,164,230,0.25); border-bottom-right-radius: 4px; }
+      .bub .t { display: block; margin-top: 4px; font-size: 10px; color: var(--muted-2); text-align: right; }
+
+      /* Terminal / data mock */
+      .term { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+      .term-bar { display: flex; gap: 6px; padding: 4px 4px 12px; border-bottom: 1px solid var(--line); }
+      .term-bar i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+      .term-body { padding: 14px 6px 4px; display: flex; flex-direction: column; gap: 8px; color: var(--muted); }
+      .term-body .q { color: var(--accent); }
+      .term-body .row { display: flex; justify-content: space-between; color: var(--text); }
+      .term-body .ok { color: #43c777; }
+
+      /* Voice mock */
+      .voice-head { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #ff6b6b; display: flex; align-items: center; gap: 6px; padding-bottom: 12px; }
+      .voice-head::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #ff6b6b; animation: dotPulse 1.6s var(--ease) infinite; }
+      @keyframes dotPulse { 0% { box-shadow: 0 0 0 0 rgba(255,107,107,0.5);} 70%{ box-shadow:0 0 0 7px rgba(255,107,107,0);} 100%{ box-shadow:0 0 0 0 rgba(255,107,107,0);} }
+      .voice-who { display: flex; align-items: center; gap: 10px; padding: 12px 0; }
+      .voice-who .mh-ava { background: linear-gradient(135deg, #e6c88c, #b88a3f); }
+
+      /* Integrations */
+      .pills { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+      .pill-i { font-size: 13.5px; color: var(--text); border: 1px solid var(--line-2); background: var(--card); padding: 9px 16px; border-radius: 999px; transition: border-color 0.25s var(--ease), background 0.25s var(--ease), transform 0.25s var(--ease); }
+      .pill-i:hover { border-color: var(--accent); background: rgba(140,164,230,0.08); transform: translateY(-2px); }
+
+      /* Stats */
+      .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 44px; }
+      .stat .n { font-family: 'Fraunces', Georgia, serif; font-weight: 500; color: var(--accent); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; }
+      .stat .l { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+
+      /* Process */
+      .steps { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+      .step { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 24px 22px; transition: border-color 0.3s var(--ease), transform 0.3s var(--ease); }
+      .step:hover { border-color: var(--line-2); transform: translateY(-3px); }
+      .step .s-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); }
+      .step h4 { font-size: 16px; margin-top: 12px; }
+      .step p { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+      /* CTA band */
+      .cta-band { text-align: center; border: 1px solid var(--line); border-radius: 26px; background: radial-gradient(ellipse at 50% 0%, rgba(140,164,230,0.14), transparent 70%), var(--bg-2); padding: 56px 24px; }
+      .cta-band h2 { max-width: 20ch; margin-inline: auto; }
+      .cta-band .cta-row { margin-top: 28px; }
+
+      /* Footer */
+      footer { border-top: 1px solid var(--line); padding: 44px 0; margin-top: 56px; }
+      .foot { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+      .foot img { height: 28px; }
+      .foot-links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px; color: var(--muted); }
+      .foot-links a:hover { color: var(--text); }
+      .copy { margin-top: 24px; font-size: 12.5px; color: var(--muted-2); }
+
+      /* Clients marquee */
+      .clients { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 24px 0; overflow: hidden; }
+      .clients p { text-align: center; font-size: 11.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
+      .marquee { margin-top: 20px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+      .marquee-track { display: flex; align-items: center; gap: 54px; width: max-content; animation: scrollx 34s linear infinite; }
+      .marquee:hover .marquee-track { animation-play-state: paused; }
+      @keyframes scrollx { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      .marquee img { height: 30px; width: auto; max-width: 140px; object-fit: contain; filter: grayscale(1) brightness(0) invert(1); opacity: 0.5; transition: opacity 0.25s var(--ease); }
+      .marquee img:hover { opacity: 0.9; }
+
+      /* Reveal + entrance */
+      @media (prefers-reduced-motion: no-preference) {
+        .reveal { opacity: 0; transform: translateY(24px); filter: blur(6px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease); transition-delay: var(--d, 0s); will-change: opacity, transform; }
+        .reveal.in { opacity: 1; transform: none; filter: none; }
+        .hero-anim { opacity: 0; transform: translateY(18px); animation: heroIn 0.85s var(--ease) forwards; animation-delay: var(--d, 0s); }
+        @keyframes heroIn { to { opacity: 1; transform: none; } }
+      }
+
+      @media (max-width: 820px) {
+        .feature { grid-template-columns: 1fr; gap: 26px; }
+        .feature:nth-child(even) .feat-media { order: 0; }
+        .stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      }
+      @media (max-width: 560px) {
+        .btn { width: 100%; justify-content: center; }
+        .cta-row { flex-direction: column; }
+        .nav-cta { padding: 9px 14px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a href="https://vinculo.uy" aria-label="Vínculo"><img src="logos/vinculo-horizontal-cream.png" alt="Vínculo" /></a>
+        <a class="nav-cta" href="#agenda">Agendar llamada
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <svg class="atom-glyph" viewBox="0 0 200 200" fill="none" stroke="#8ca4e6" stroke-width="1.5" aria-hidden="true">
+        <circle cx="100" cy="100" r="10" fill="#8ca4e6" stroke="none"/>
+        <ellipse cx="100" cy="100" rx="78" ry="30"/>
+        <ellipse cx="100" cy="100" rx="78" ry="30" transform="rotate(60 100 100)"/>
+        <ellipse cx="100" cy="100" rx="78" ry="30" transform="rotate(120 100 100)"/>
+      </svg>
+      <div class="wrap">
+        <p class="eyebrow hero-anim" style="--d:.05s">Automatización con IA <span class="sep">·</span> Uruguay</p>
+        <h1 class="hero-anim" style="--d:.15s">Construimos IA que <span class="ac">opera tu negocio</span>.</h1>
+        <p class="lead hero-anim" style="--d:.28s">
+          Agentes de WhatsApp y voz, automatizaciones y software a medida con IA.
+          Los diseñamos, construimos y <strong>operamos</strong> — en producción, no en pilotos.
+        </p>
+        <div class="cta-row hero-anim" style="--d:.4s">
+          <a class="btn btn-primary" href="#agenda">Agendar llamada
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="btn-text" href="#hacemos">Ver cómo trabajamos</a>
+        </div>
+        <p class="mini hero-anim" style="--d:.52s">Agentes de IA <span>·</span> Automatización <span>·</span> Software a medida</p>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="block" style="padding-top:0">
+      <div class="wrap">
+        <div class="clients reveal">
+          <p>Negocios que ya confían en Vínculo</p>
+          <div class="marquee"><div class="marquee-track">
+            <img src="logos/clients/pirez.png" alt="Pírez"/><img src="logos/clients/vitola.png" alt="Vitola"/><img src="logos/clients/semillero.png" alt="Semillero"/><img src="logos/clients/redone.png" alt="Redone"/><img src="logos/clients/merladett.png" alt="Merladett"/><img src="logos/clients/expande.png" alt="Expande"/><img src="logos/clients/windoor.png" alt="Windoor"/>
+            <img src="logos/clients/pirez.png" alt="" aria-hidden="true"/><img src="logos/clients/vitola.png" alt="" aria-hidden="true"/><img src="logos/clients/semillero.png" alt="" aria-hidden="true"/><img src="logos/clients/redone.png" alt="" aria-hidden="true"/><img src="logos/clients/merladett.png" alt="" aria-hidden="true"/><img src="logos/clients/expande.png" alt="" aria-hidden="true"/><img src="logos/clients/windoor.png" alt="" aria-hidden="true"/>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LO QUE HACEMOS -->
+    <section class="block" id="hacemos">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="sec-eyebrow">Lo que hacemos</span>
+          <h2>Agentes de IA listos para operar tu negocio.</h2>
+          <p>Hablan con tus clientes, tus datos y tus líneas telefónicas. En producción en semanas, no en trimestres.</p>
+        </div>
+
+        <!-- 01 WhatsApp -->
+        <div class="feature reveal">
+          <div>
+            <span class="feat-num">01</span>
+            <h3>Agentes conversacionales</h3>
+            <p>Calificación, soporte y ventas por WhatsApp e Instagram — en los canales que tus clientes ya usan.</p>
+            <ul class="bullets">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Responden 24/7 y no dejan leads sin atender</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Califican, cotizan y agendan solos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Derivan a una persona cuando hace falta</li>
+            </ul>
+          </div>
+          <div class="feat-media">
+            <div class="mock">
+              <div class="mock-head"><span class="mh-ava">V</span><div><div class="mh-name">Vínculo Agent</div><div class="mh-sub">online</div></div></div>
+              <div class="chat">
+                <div class="bub in">Hola, ¿tienen disponible la pastilla de freno Bosch para Hilux 2018?<span class="t">10:28</span></div>
+                <div class="bub out">Sí, tenemos stock 👌 ¿Querés que te la reserve y te paso el link de pago?<span class="t">11:30</span></div>
+                <div class="bub in">Dale, mandame<span class="t">11:32</span></div>
+                <div class="bub out">Listo. Reserva creada: vinculo.uy/pay/4823 — válido 1h.<span class="t">11:34</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Datos -->
+        <div class="feature reveal">
+          <div>
+            <span class="feat-num">02</span>
+            <h3>Hablale a tus datos</h3>
+            <p>Consultá tus bases y documentos en lenguaje natural, sin planillas ni reportes manuales.</p>
+            <ul class="bullets">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Preguntá sobre ventas, stock o clientes en segundos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> RAG sobre contratos, manuales y documentos internos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Accesible desde WhatsApp, Slack o la web</li>
+            </ul>
+          </div>
+          <div class="feat-media">
+            <div class="mock term">
+              <div class="term-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="term-body">
+                <div class="q">› ¿Cuánto vendimos hoy?</div>
+                <div>SELECT SUM(total) FROM ventas</div>
+                <div>WHERE fecha = CURRENT_DATE;</div>
+                <div class="row"><span>#4821</span><span>$2.140</span></div>
+                <div class="row"><span>#4822</span><span>$1.860</span></div>
+                <div class="row"><span>#4823</span><span>$3.090</span></div>
+                <div class="ok">→ Hoy: $12.450 en 87 pedidos ✓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Voice -->
+        <div class="feature reveal">
+          <div>
+            <span class="feat-num">03</span>
+            <h3>Voice AI — agentes telefónicos</h3>
+            <p>Atienden el teléfono, agendan, califican y resuelven — con voz natural, día y noche.</p>
+            <ul class="bullets">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> No más llamadas perdidas ni esperas</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Agendan en tu calendario y mandan confirmación</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Transcripción y resumen de cada llamada</li>
+            </ul>
+          </div>
+          <div class="feat-media">
+            <div class="mock">
+              <div class="voice-head">En llamada · Live</div>
+              <div class="voice-who"><span class="mh-ava">S</span><div><div class="mh-name">Sofía</div><div class="mh-sub" style="color:var(--muted)">Recepcionista IA</div></div></div>
+              <div class="chat" style="padding-top:4px">
+                <div class="bub in">Hola, quería sacar un turno para el martes.<span class="t">00:04</span></div>
+                <div class="bub out">¡Claro! Tengo a las 15:00 o 17:30. ¿Cuál te queda mejor?<span class="t">00:07</span></div>
+                <div class="bub in">A las 17:30 mejor.<span class="t">00:11</span></div>
+                <div class="bub out">Listo, te agendé el martes 17:30. Te mando la confirmación por SMS.<span class="t">00:14</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 Automatizaciones -->
+        <div class="feature reveal">
+          <div>
+            <span class="feat-num">04</span>
+            <h3>Automatizaciones end-to-end</h3>
+            <p>Integramos tu stack y tus procesos para que el trabajo repetitivo se haga solo.</p>
+            <ul class="bullets">
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Conectamos Meta, Google, CRM, e-commerce y más</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Reportes y dashboards automáticos</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8ca4e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg> Alertas y seguimiento desde el día uno</li>
+            </ul>
+          </div>
+          <div class="feat-media">
+            <div class="mock term">
+              <div class="term-bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span style="margin-left:auto;font-size:10px;letter-spacing:.14em;color:var(--muted-2)">AUTOMATIZACIÓN</span></div>
+              <div class="term-body">
+                <div>📩 Nuevo lead desde Meta Ads</div>
+                <div>→ Guardado en CRM</div>
+                <div>→ WhatsApp de bienvenida enviado</div>
+                <div>→ Tarea asignada a Ventas</div>
+                <div class="ok">✓ Automático · 3.2s</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRACIONES -->
+    <section class="block">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="sec-eyebrow">Integraciones</span>
+          <h2>Funciona con las herramientas que ya usás.</h2>
+          <p>Construimos sobre tu stack: CRMs, bases de datos, mensajería y telefonía.</p>
+        </div>
+        <div class="pills reveal">
+          <span class="pill-i">WhatsApp Business API</span><span class="pill-i">Instagram</span><span class="pill-i">Telegram</span>
+          <span class="pill-i">OpenAI</span><span class="pill-i">n8n</span><span class="pill-i">Supabase</span><span class="pill-i">PostgreSQL</span>
+          <span class="pill-i">HubSpot</span><span class="pill-i">ManyChat</span><span class="pill-i">Google Sheets</span><span class="pill-i">Make</span>
+          <span class="pill-i">Mercado Libre</span><span class="pill-i">Meta Ads</span><span class="pill-i">Google Ads</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EN NÚMEROS -->
+    <section class="block">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="sec-eyebrow">En números</span>
+          <h2>Hecho para correr en producción.</h2>
+        </div>
+        <div class="stats reveal">
+          <div class="stat"><div class="n">24/7</div><div class="l">Operación monitoreada</div></div>
+          <div class="stat"><div class="n">&lt;48h</div><div class="l">Respuesta a nuevos proyectos</div></div>
+          <div class="stat"><div class="n">100%</div><div class="l">En producción, no pilotos</div></div>
+          <div class="stat"><div class="n">+7</div><div class="l">Negocios acompañados</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section class="block">
+      <div class="wrap">
+        <div class="sec-head center reveal">
+          <span class="sec-eyebrow">Cómo trabajamos</span>
+          <h2>Un solo equipo, de punta a punta.</h2>
+          <p>Desde la primera llamada hasta operar en producción. Sin traspasos, sin intermediarios.</p>
+        </div>
+        <div class="steps reveal">
+          <div class="step"><div class="s-num">01</div><h4>Discovery</h4><p>Mapeamos tu proceso, tu stack y los objetivos, y acordamos el alcance.</p></div>
+          <div class="step"><div class="s-num">02</div><h4>Diseño</h4><p>Diseñamos el sistema de punta a punta: integraciones, flujos y derivaciones.</p></div>
+          <div class="step"><div class="s-num">03</div><h4>Construcción</h4><p>Implementamos y probamos con datos reales, con demos semanales.</p></div>
+          <div class="step"><div class="s-num">04</div><h4>Operación</h4><p>Lo ponemos en producción y lo operamos con vos — soporte y mejoras continuas.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA + CALENDLY -->
+    <section class="block" id="agenda">
+      <div class="wrap">
+        <div class="cta-band reveal">
+          <span class="sec-eyebrow">Agendá una llamada</span>
+          <h2>¿No sabés por dónde empezar con IA?</h2>
+          <p style="color:var(--muted);max-width:46ch;margin:14px auto 0">Charlamos 30 minutos, miramos tu operación y te decimos qué se puede automatizar primero. Sin compromiso.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#cal">Ver horarios
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn-text" href="https://wa.me/59895026329?text=Hola,%20quiero%20saber%20m%C3%A1s%20sobre%20las%20soluciones%20de%20IA%20de%20V%C3%ADnculo" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+          </div>
+        </div>
+        <div id="cal" style="margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#f7f5f0" class="reveal">
+          <div class="calendly-inline-widget" style="min-width:320px;height:700px" data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=8ca4e6"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <a href="https://vinculo.uy" aria-label="Vínculo"><img src="logos/vinculo-horizontal-cream.png" alt="Vínculo"/></a>
+          <div class="foot-links">
+            <a href="mailto:lucas@vinculo.uy">lucas@vinculo.uy</a>
+            <a href="https://wa.me/59895026329?text=Hola,%20quiero%20saber%20m%C3%A1s%20sobre%20IA" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.instagram.com/vinculo.uy" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/company/vinculo" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://vinculo.uy">Sitio principal →</a>
+          </div>
+        </div>
+        <p class="copy">© 2026 Vínculo · IA & Automatización · Montevideo, Uruguay</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll('.reveal');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+          els.forEach(function (el) { el.classList.add('in'); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+  </body>
+</html>
