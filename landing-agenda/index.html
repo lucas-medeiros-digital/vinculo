@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="logos/vinculo-isotipo-gold.png" />
+
+    <title>Agendá una reunión · Vínculo — Growth Marketing</title>
+    <meta
+      name="description"
+      content="Agendá un diagnóstico gratuito de 30 minutos con Vínculo. Analizamos tu negocio y te mostramos cómo escalar — por Google Meet, sin compromiso."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Agendá una reunión · Vínculo" />
+    <meta
+      property="og:description"
+      content="Diagnóstico gratuito de 30 minutos. Analizamos tu negocio y te mostramos por dónde empezar a escalar."
+    />
+    <meta property="og:url" content="https://agenda.vinculo.uy/" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Calendly inline widget -->
+    <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <style>
+      :root {
+        --bg: #061e19;
+        --panel: #0c3a30;
+        --panel-2: #0a2e26;
+        --gold: #c8a45a;
+        --gold-soft: #d9bd84;
+        --cream: #f7f5f0;
+        --line: rgba(247, 245, 240, 0.12);
+        --line-strong: rgba(247, 245, 240, 0.22);
+        --muted: rgba(247, 245, 240, 0.62);
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--cream);
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 1120px;
+        margin-inline: auto;
+        padding-inline: 20px;
+      }
+
+      /* ===== Header ===== */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(6, 30, 25, 0.72);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
+      .nav img {
+        height: 30px;
+        width: auto;
+      }
+      .nav-wa {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--cream);
+        border: 1px solid var(--line-strong);
+        padding: 9px 16px;
+        border-radius: 999px;
+        transition: border-color 0.25s ease, background 0.25s ease;
+      }
+      .nav-wa:hover {
+        border-color: var(--gold);
+        background: rgba(200, 164, 90, 0.08);
+      }
+
+      /* ===== Hero ===== */
+      .hero {
+        position: relative;
+        padding: 72px 0 56px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: -140px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 760px;
+        max-width: 120vw;
+        height: 520px;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(200, 164, 90, 0.22),
+          rgba(200, 164, 90, 0) 68%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: var(--cream);
+        border: 1px solid var(--line-strong);
+        background: rgba(247, 245, 240, 0.04);
+        padding: 7px 15px 7px 13px;
+        border-radius: 999px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 0 4px rgba(200, 164, 90, 0.18);
+      }
+      h1 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        font-size: clamp(2.1rem, 6vw, 4rem);
+        margin: 24px auto 0;
+        max-width: 16ch;
+      }
+      h1 .gold {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .sub {
+        margin: 22px auto 0;
+        max-width: 54ch;
+        font-size: clamp(1rem, 2.4vw, 1.15rem);
+        color: var(--muted);
+      }
+      .cta-row {
+        margin-top: 34px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 26px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: #2a2007;
+        border: 1px solid var(--gold);
+      }
+      .btn-primary:hover {
+        background: var(--gold-soft);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--cream);
+        border: 1px solid var(--line-strong);
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+        background: rgba(200, 164, 90, 0.08);
+      }
+      .trust {
+        margin-top: 30px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+      .trust svg {
+        flex: none;
+      }
+
+      /* ===== Benefits ===== */
+      section.block {
+        padding: 56px 0;
+      }
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--gold);
+      }
+      .block h2 {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 500;
+        letter-spacing: -0.015em;
+        line-height: 1.12;
+        font-size: clamp(1.7rem, 4.2vw, 2.6rem);
+        margin-top: 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+        margin-top: 36px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(12, 58, 48, 0.55), rgba(10, 46, 38, 0.3));
+        border-radius: var(--radius);
+        padding: 26px 24px;
+        transition: border-color 0.25s ease, transform 0.25s ease;
+      }
+      .card:hover {
+        border-color: var(--line-strong);
+        transform: translateY(-3px);
+      }
+      .ico {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: rgba(200, 164, 90, 0.12);
+        border: 1px solid rgba(200, 164, 90, 0.28);
+        margin-bottom: 18px;
+      }
+      .card h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+
+      /* ===== Clients ===== */
+      .clients {
+        border: 1px solid var(--line);
+        background: var(--cream);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        text-align: center;
+      }
+      .clients p {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #0c3a30;
+        opacity: 0.6;
+      }
+      .logos {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 28px 40px;
+      }
+      .logos img {
+        height: 34px;
+        width: auto;
+        max-width: 130px;
+        object-fit: contain;
+        filter: grayscale(1);
+        opacity: 0.72;
+        transition: filter 0.25s ease, opacity 0.25s ease;
+      }
+      .logos img:hover {
+        filter: grayscale(0);
+        opacity: 1;
+      }
+
+      /* ===== Agenda / Calendly ===== */
+      .agenda-head {
+        text-align: center;
+        max-width: 640px;
+        margin-inline: auto;
+      }
+      .agenda-head .sub {
+        margin-top: 14px;
+      }
+      .cal-card {
+        margin-top: 32px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: var(--cream);
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      }
+      .calendly-inline-widget {
+        min-width: 320px;
+        height: 720px;
+      }
+      .wa-alt {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 14.5px;
+        color: var(--muted);
+      }
+      .wa-alt a {
+        color: var(--gold);
+        font-weight: 600;
+        border-bottom: 1px solid rgba(200, 164, 90, 0.4);
+      }
+
+      /* ===== Footer ===== */
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 44px 0;
+        margin-top: 24px;
+      }
+      .foot {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .foot img {
+        height: 30px;
+      }
+      .foot-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .foot-links a:hover {
+        color: var(--cream);
+      }
+      .copy {
+        margin-top: 26px;
+        font-size: 12.5px;
+        color: rgba(247, 245, 240, 0.4);
+      }
+
+      @media (max-width: 560px) {
+        .nav-wa span {
+          display: none;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .cta-row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="wrap nav">
+        <a href="https://vinculo.uy" aria-label="Vínculo">
+          <img src="logos/vinculo-horizontal-cream.png" alt="Vínculo" />
+        </a>
+        <a
+          class="nav-wa"
+          href="https://wa.me/59895026329?text=Hola,%20me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20con%20V%C3%ADnculo"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8a45a" aria-hidden="true">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.84c2.17 0 4.2.85 5.74 2.38a8.06 8.06 0 0 1 2.38 5.74c0 4.54-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.03-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24Zm4.52 10.1c-.07-.11-.25-.18-.52-.32-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.46l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.63 1.12 2.81c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.6-.65 1.83-1.29.23-.63.23-1.17.16-1.28Z" />
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill"><span class="dot"></span> Diagnóstico gratuito · 30 min</span>
+        <h1>Agendá una reunión y descubrí cómo <span class="gold">escalar tu negocio</span>.</h1>
+        <p class="sub">
+          Una charla de 30 minutos por Google Meet, sin compromiso. Analizamos tu
+          operación y tus campañas, y te mostramos por dónde empezar a crecer.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#agenda">
+            Ver horarios disponibles
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a
+            class="btn btn-ghost"
+            href="https://wa.me/59895026329?text=Hola,%20me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20con%20V%C3%ADnculo"
+            target="_blank"
+            rel="noopener"
+          >
+            Coordinar por WhatsApp
+          </a>
+        </div>
+        <div class="trust">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8a45a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Meta Business Partner certificado
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="block">
+      <div class="wrap">
+        <div style="text-align:center;max-width:640px;margin-inline:auto">
+          <span class="eyebrow">Qué obtenés en la llamada</span>
+          <h2>Claridad real sobre tu negocio, en 30 minutos.</h2>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <span class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a45a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+            </span>
+            <h3>Diagnóstico claro</h3>
+            <p>Revisamos tu presencia digital, tus campañas y tu operación actual.</p>
+          </div>
+          <div class="card">
+            <span class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a45a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 3-3 3 3 5-6"/></svg>
+            </span>
+            <h3>Plan de acción</h3>
+            <p>Salís con los próximos pasos priorizados para empezar a crecer.</p>
+          </div>
+          <div class="card">
+            <span class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a45a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            </span>
+            <h3>Oportunidades</h3>
+            <p>Detectamos dónde estás perdiendo clientes o dejando dinero en la mesa.</p>
+          </div>
+          <div class="card">
+            <span class="ico">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a45a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3Z"/></svg>
+            </span>
+            <h3>Sin compromiso</h3>
+            <p>Es una charla honesta. Si no somos para vos, te lo decimos de frente.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="block" style="padding-top:0">
+      <div class="wrap">
+        <div class="clients">
+          <p>Negocios que ya confían en Vínculo</p>
+          <div class="logos">
+            <img src="logos/clients/pirez.png" alt="Pírez" />
+            <img src="logos/clients/vitola.png" alt="Clínica Vitola" />
+            <img src="logos/clients/semillero.png" alt="Semillero" />
+            <img src="logos/clients/redone.png" alt="Redone" />
+            <img src="logos/clients/merladett.png" alt="Merladett" />
+            <img src="logos/clients/expande.png" alt="Expande" />
+            <img src="logos/clients/windoor.png" alt="Windoor" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section class="block" id="agenda" style="padding-top:8px">
+      <div class="wrap">
+        <div class="agenda-head">
+          <span class="eyebrow">Agendá tu reunión</span>
+          <h2>Elegí el horario que mejor te quede</h2>
+          <p class="sub">
+            Reservá tu lugar en el calendario. Te llega la confirmación con el link
+            de Google Meet al instante.
+          </p>
+        </div>
+        <div class="cal-card">
+          <!-- Calendly inline widget -->
+          <div
+            class="calendly-inline-widget"
+            data-url="https://calendly.com/lucas2002medeiros/30min?hide_gdpr_banner=1&background_color=f7f5f0&text_color=0f1a15&primary_color=0c3a30"
+          ></div>
+        </div>
+        <p class="wa-alt">
+          ¿Preferís coordinar por otro canal?
+          <a
+            href="https://wa.me/59895026329?text=Hola,%20me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20con%20V%C3%ADnculo"
+            target="_blank"
+            rel="noopener"
+            >Escribinos por WhatsApp</a
+          >.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <a href="https://vinculo.uy" aria-label="Vínculo">
+            <img src="logos/vinculo-horizontal-cream.png" alt="Vínculo" />
+          </a>
+          <div class="foot-links">
+            <a href="mailto:lucas@vinculo.uy">lucas@vinculo.uy</a>
+            <a
+              href="https://wa.me/59895026329?text=Hola,%20me%20gustar%C3%ADa%20coordinar%20una%20reuni%C3%B3n%20con%20V%C3%ADnculo"
+              target="_blank"
+              rel="noopener"
+              >WhatsApp</a
+            >
+            <a href="https://www.instagram.com/vinculo.uy" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/company/vinculo" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://vinculo.uy">Ir al sitio →</a>
+          </div>
+        </div>
+        <p class="copy">© 2026 Vínculo · Growth Marketing · Montevideo, Uruguay</p>
+      </div>
+    </footer>
+  </body>
+</html>
