@@ -25,6 +25,22 @@
     <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
+    <!-- Google Analytics 4 — reemplazá G-XXXXXXXXXX por tu ID real de GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '971709422659035');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=971709422659035&ev=PageView&noscript=1" /></noscript>
+
     <style>
       :root {
         --bg: #06130e;
@@ -425,7 +441,7 @@
             <a class="btn btn-primary" href="#cal">Ver horarios
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a class="btn-text" href="https://wa.me/59895026329?text=Hola,%20quiero%20un%20diagn%C3%B3stico%20de%20marketing%20con%20V%C3%ADnculo" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+            <a class="btn-text" href="https://wa.me/59893837694?text=Hola,%20quiero%20un%20diagn%C3%B3stico%20de%20marketing%20con%20V%C3%ADnculo" target="_blank" rel="noopener">Escribir por WhatsApp</a>
           </div>
         </div>
         <div id="cal" style="margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#f7f5f0" class="reveal">
@@ -440,7 +456,7 @@
           <a href="https://vinculo.uy" aria-label="Vínculo"><img src="logos/vinculo-horizontal-cream.png" alt="Vínculo"/></a>
           <div class="foot-links">
             <a href="mailto:lucas@vinculo.uy">lucas@vinculo.uy</a>
-            <a href="https://wa.me/59895026329?text=Hola,%20quiero%20saber%20m%C3%A1s%20sobre%20marketing" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://wa.me/59893837694?text=Hola,%20quiero%20saber%20m%C3%A1s%20sobre%20marketing" target="_blank" rel="noopener">WhatsApp</a>
             <a href="https://www.instagram.com/vinculo.uy" target="_blank" rel="noopener">Instagram</a>
             <a href="https://www.linkedin.com/company/vinculo" target="_blank" rel="noopener">LinkedIn</a>
             <a href="https://vinculo.uy">Sitio principal →</a>
@@ -450,6 +466,22 @@
       </div>
     </footer>
 
+    <!-- Conversiones: WhatsApp (Contact) y reunión agendada en Calendly (Schedule) -->
+    <script>
+      (function () {
+        function fire(ev, gaEv) {
+          try { if (window.fbq) fbq('track', ev); } catch (e) {}
+          try { if (window.gtag) gtag('event', gaEv); } catch (e) {}
+        }
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+          if (a) fire('Contact', 'whatsapp_click');
+        });
+        window.addEventListener('message', function (e) {
+          if (e.data && e.data.event === 'calendly.event_scheduled') fire('Schedule', 'reunion_agendada');
+        });
+      })();
+    </script>
     <script>
       (function () {
         var els = document.querySelectorAll('.reveal');

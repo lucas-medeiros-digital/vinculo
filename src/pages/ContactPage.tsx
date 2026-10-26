@@ -1,8 +1,10 @@
 import { useState, type ReactNode, type FormEvent } from 'react'
-import { Video, Mail, MessageCircle, MapPin, Linkedin, Instagram, Check, ArrowRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Video, Mail, MessageCircle, MapPin, Linkedin, Instagram, ArrowRight } from 'lucide-react'
 import { IsoV3D } from '../components/IsoV3D'
 import { Reveal } from '../components/ui/motion'
 import { openCalendly, WHATSAPP_URL, FORM_TO_EMAIL } from '../lib/constants'
+import { trackLead } from '../lib/track'
 
 const inputClasses =
   'w-full rounded-xl border border-[#EBE8DF] bg-white px-4 py-3 font-jakarta text-[14px] transition focus:border-[#0C3A30] focus:outline-none focus:ring-2 focus:ring-[#0C3A30]/10'
@@ -121,36 +123,22 @@ function InfoItem({ icon, title, children }: { icon: ReactNode; title: string; c
 }
 
 function ContactForm() {
-  const [sent, setSent] = useState(false)
+  const navigate = useNavigate()
   const [data, setData] = useState({ nombre: '', email: '', mensaje: '' })
   const valid = data.nombre.trim() !== '' && data.email.trim() !== '' && data.mensaje.trim() !== ''
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (!valid) return
-    // Interim delivery via the visitor's mail client (no backend yet).
-    // TODO(dev): replace with a form service (Netlify Forms / Formspree).
+    // Abrimos el cliente de correo sin desmontar la SPA (entrega interina, sin backend).
     const subject = `Nuevo mensaje de ${data.nombre} — Vínculo`
     const body = `Nombre: ${data.nombre}\nEmail: ${data.email}\n\nMensaje:\n${data.mensaje}`
-    window.location.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`
-    setSent(true)
-  }
-
-  if (sent) {
-    return (
-      <div className="py-6 text-center">
-        <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-[#0C3A30]">
-          <Check size={28} className="text-[#C8A45A]" />
-        </div>
-        <h3 className="font-fraunces text-[20px] font-medium text-[#0F1A15]">¡Mensaje enviado!</h3>
-        <p className="mx-auto mt-2 max-w-xs font-jakarta text-[14px] text-gray-600">
-          Te respondemos a la brevedad. Si querés, también podés agendar una
-          reunión directamente.
-        </p>
-      </div>
-    )
+    const mail = document.createElement('a')
+    mail.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    mail.click()
+    // Conversión medible + página de gracias.
+    trackLead()
+    navigate('/gracias')
   }
 
   return (

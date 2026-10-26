@@ -1,5 +1,5 @@
-// WhatsApp line (+598 95 026329, digits only for wa.me).
-export const WHATSAPP_NUMBER = '59895026329'
+// WhatsApp line (+598 93 837694, digits only for wa.me).
+export const WHATSAPP_NUMBER = '59893837694'
 
 export const WHATSAPP_MESSAGE = 'Hola, me gustaría coordinar una reunión con Vínculo'
 
