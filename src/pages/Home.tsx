@@ -6,6 +6,7 @@ import { PopularServices } from '../components/sections/PopularServices'
 import { OurSolutions } from '../components/sections/OurSolutions'
 import { Clients } from '../components/sections/Clients'
 import { AboutTeaser } from '../components/sections/AboutTeaser'
+import { FounderSection } from '../components/sections/FounderSection'
 import { FinalCta } from '../components/sections/FinalCta'
 
 export function Home() {
@@ -19,6 +20,7 @@ export function Home() {
       <OurSolutions />
       <Clients />
       <AboutTeaser />
+      <FounderSection />
       <FinalCta />
     </>
   )

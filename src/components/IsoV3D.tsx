@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js'
 import isoSvg from '../assets/vinculo-iso.svg?raw'
@@ -6,10 +6,15 @@ import isoSvg from '../assets/vinculo-iso.svg?raw'
 /**
  * Real 3D isotipo: the Vínculo "V" extruded into a solid gold volume that
  * tumbles on multiple axes (so it reads from every side) and reacts to the
- * cursor. WebGL via three.js. Falls back gracefully if WebGL is unavailable.
+ * cursor. WebGL via three.js.
+ *
+ * Graceful fallback: if WebGL is unavailable (hardware acceleration off, GPU
+ * blocklisted, too many live contexts, or the context is lost at runtime) the
+ * gold isotipo PNG is shown instead, so the "V" never simply vanishes.
  */
 export function IsoV3D({ className = '' }: { className?: string }) {
   const mountRef = useRef<HTMLDivElement>(null)
+  const [failed, setFailed] = useState(false)
 
   useEffect(() => {
     const mount = mountRef.current
@@ -26,11 +31,19 @@ export function IsoV3D({ className = '' }: { className?: string }) {
     try {
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
     } catch {
-      return // no WebGL — leave the container empty
+      setFailed(true) // no WebGL — show the static gold isotipo instead
+      return
     }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(width, height)
     mount.appendChild(renderer.domElement)
+
+    // If the GPU drops the context at runtime, swap to the static fallback.
+    const onContextLost = (e: Event) => {
+      e.preventDefault()
+      setFailed(true)
+    }
+    renderer.domElement.addEventListener('webglcontextlost', onContextLost)
 
     // Lighting tuned for a warm gold read.
     scene.add(new THREE.AmbientLight(0xffffff, 0.75))
@@ -129,6 +142,7 @@ export function IsoV3D({ className = '' }: { className?: string }) {
       ro.disconnect()
       mount.removeEventListener('pointermove', onMove)
       mount.removeEventListener('pointerleave', onLeave)
+      renderer.domElement.removeEventListener('webglcontextlost', onContextLost)
       geometry.dispose()
       material.dispose()
       renderer.dispose()
@@ -136,5 +150,19 @@ export function IsoV3D({ className = '' }: { className?: string }) {
     }
   }, [])
 
-  return <div ref={mountRef} className={className} style={{ touchAction: 'none' }} />
+  return (
+    <div className={className} style={{ touchAction: 'none' }}>
+      {/* three.js mounts its <canvas> here */}
+      <div ref={mountRef} className="h-full w-full" />
+      {/* Shown only when WebGL is unavailable / the context is lost. */}
+      {failed && (
+        <img
+          src="/logos/vinculo-isotipo-gold.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+      )}
+    </div>
+  )
 }

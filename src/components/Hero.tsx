@@ -6,7 +6,7 @@ import { staggerContainer, fadeUpItem } from './ui/motion'
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-[#F7F5F0]">
+    <section className="relative flex min-h-[640px] h-screen max-h-[900px] flex-col overflow-hidden bg-[#F7F5F0]">
       <HeroShader />
 
       {/* Interactive 3D "V" — absolutely placed so it never reflows the content.
@@ -14,11 +14,12 @@ export function Hero() {
           Desktop: off to the right side. */}
       <IsoV3D className="absolute left-1/2 top-[15%] z-20 h-40 w-40 -translate-x-1/2 sm:h-52 sm:w-52 lg:left-auto lg:right-[7%] lg:top-1/2 lg:h-64 lg:w-64 lg:-translate-y-1/2 lg:translate-x-0" />
 
-      {/* Hero content pinned to the bottom of the viewport */}
-      <div className="relative z-20 flex flex-1 flex-col">
-        <div className="flex-1" />
+      {/* Hero content: pinned to the bottom on mobile (V floats above it),
+          vertically centered on desktop so it stays aligned with the centered
+          3D "V" regardless of viewport height (no runaway gap on tall screens). */}
+      <div className="relative z-20 flex flex-1 flex-col justify-end lg:justify-center">
         <motion.div
-          className="mx-auto w-full max-w-[1440px] px-5 pb-14 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20"
+          className="mx-auto w-full max-w-[1440px] px-5 pb-14 sm:px-8 sm:pb-16 lg:px-12 lg:py-0"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
