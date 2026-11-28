@@ -32,3 +32,6 @@ Thumbs.db
 
 # Claude Code local settings (machine-specific)
 .claude/settings.local.json
+
+# Publish zips (Hostinger)
+*.zip

@@ -7,6 +7,12 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURICo
   WHATSAPP_MESSAGE,
 )}`
 
+// Web3Forms access key for the /feria form (emails each submission to the
+// address the key was created with — lucas@vinculo.uy). Get it free at
+// https://web3forms.com. It is meant to be public. While empty, the form's
+// main button opens WhatsApp with the same data instead.
+export const WEB3FORMS_ACCESS_KEY = ''
+
 // Contact emails shown across the site.
 export const CONTACT_EMAILS = ['lucas@vinculo.uy', 'matias@vinculo.uy'] as const
 
