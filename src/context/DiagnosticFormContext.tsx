@@ -6,7 +6,8 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { FORM_TO_EMAIL } from '../lib/constants'
+import { deliverForm } from '../lib/sendForm'
+import { trackLead } from '../lib/track'
 
 /** Stable ids for the Step 1 "¿Qué querés mejorar?" options. Shared between the
  * form (Section 8) and the solutions catalog (Section 6) so a service panel can
@@ -113,36 +114,31 @@ export function DiagnosticFormProvider({ children }: { children: ReactNode }) {
     })
   }, [])
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async () => {
     setSubmitting(true)
-    // Interim delivery via the visitor's mail client (no backend yet).
-    // TODO(dev): replace with a form service (Netlify Forms / Formspree).
-    const subject = `Nueva solicitud de diagnóstico — ${data.nombre || 'Vínculo'}`
-    const body = [
-      `Nombre: ${data.nombre}`,
-      `Empresa: ${data.empresa || '-'}`,
-      `WhatsApp: ${data.countryCode} ${data.whatsapp}`,
-      `Email: ${data.email}`,
-      '',
-      `Qué quiere mejorar: ${data.improve.join(', ') || '-'}`,
-      `Rubro: ${data.rubro || '-'}`,
-      `Ya invierte en publicidad: ${data.invierte || '-'}`,
-      '',
-      `Mensaje: ${data.mensaje || '-'}`,
-    ].join('\n')
-    window.location.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`
-
-    window.setTimeout(() => {
-      setSubmitting(false)
-      setSubmitted(true)
-      try {
-        localStorage.removeItem(STORAGE_KEY)
-      } catch {
-        /* ignore */
-      }
-    }, 900)
+    // Web3Forms when the key is set; otherwise the visitor's mail app.
+    await deliverForm(
+      `Nueva solicitud de diagnóstico — ${data.nombre || 'Vínculo'}`,
+      {
+        Nombre: data.nombre,
+        Empresa: data.empresa,
+        WhatsApp: `${data.countryCode} ${data.whatsapp}`,
+        Email: data.email,
+        'Qué quiere mejorar': data.improve.join(', '),
+        Rubro: data.rubro,
+        'Ya invierte en publicidad': data.invierte,
+        Mensaje: data.mensaje,
+      },
+      data.email,
+    )
+    trackLead()
+    setSubmitting(false)
+    setSubmitted(true)
+    try {
+      localStorage.removeItem(STORAGE_KEY)
+    } catch {
+      /* ignore */
+    }
   }, [data])
 
   return (

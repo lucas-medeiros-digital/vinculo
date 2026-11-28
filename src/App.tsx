@@ -8,6 +8,7 @@ import { ServicesPage } from './pages/ServicesPage'
 import { AboutPage } from './pages/AboutPage'
 import { ContactPage } from './pages/ContactPage'
 import { GraciasPage } from './pages/GraciasPage'
+import { FeriaPage } from './pages/FeriaPage'
 import { initGlobalTracking } from './lib/track'
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="/gracias" element={<GraciasPage />} />
           </Route>
+          {/* QR landing for artisan-fair entrepreneurs: standalone, no site chrome. */}
+          <Route path="/feria" element={<FeriaPage />} />
         </Routes>
       </DiagnosticFormProvider>
     </MotionConfig>

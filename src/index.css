@@ -30,6 +30,12 @@ body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
+/* /feria client-logo marquee (list is rendered twice, so -50% loops seamlessly) */
+@keyframes feria-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* Hide native scrollbars on carousel */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
