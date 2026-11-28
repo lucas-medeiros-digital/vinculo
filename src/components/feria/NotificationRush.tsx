@@ -29,6 +29,7 @@ const NOTIFS: Notif[] = [
   { app: 'whatsapp', title: 'Valentina', text: 'Quiero 3 para regalar en Navidad 🎄', add: { mensajes: 2 } },
   { app: 'tienda', title: 'Tu tienda', text: 'Nueva venta: Taza verde x2, $ 1.780', add: { ventas: 1 } },
   { app: 'whatsapp', title: 'Andrés', text: '¿Puedo pasar a retirar mañana?', add: { mensajes: 1 } },
+  { app: 'tienda', title: 'Tu tienda', text: 'Nueva venta: Bowl arena, $ 1.150', add: { ventas: 1 } },
   { app: 'instagram', title: 'Instagram', text: 'camiartesana y 23 personas más comenzaron a seguirte.', add: { seguidores: 24 } },
   { app: 'whatsapp', title: 'Lucía (2 mensajes)', text: '¿Hacen pedidos personalizados?', add: { mensajes: 2 } },
   { app: 'whatsapp', title: 'Grupo Regalos Empresa', text: 'Necesitamos 20 tazas para fin de año.', add: { mensajes: 4 } },
@@ -36,6 +37,7 @@ const NOTIFS: Notif[] = [
   { app: 'whatsapp', title: 'Pedro', text: 'Vi tu reel, ¿cuánto sale el set?', add: { mensajes: 2 } },
   { app: 'tienda', title: 'Tu tienda', text: 'Nueva venta: Set de platos, $ 3.200', add: { ventas: 1 } },
   { app: 'instagram', title: 'Instagram', text: 'Te mencionaron en 5 historias.', add: { seguidores: 15 } },
+  { app: 'tienda', title: 'Tu tienda', text: 'Nueva venta: Jarra + 2 tazas, $ 3.270', add: { ventas: 1 } },
   { app: 'whatsapp', title: 'Carla', text: '¡Me encantó! ¿Abren el domingo?', add: { mensajes: 2 } },
 ]
 

@@ -4,6 +4,7 @@ import { Check, Loader2 } from 'lucide-react'
 import { WhatsAppIcon } from '../FloatingWhatsApp'
 import { WEB3FORMS_ACCESS_KEY, WHATSAPP_NUMBER } from '../../lib/constants'
 import { trackContact, trackLead } from '../../lib/track'
+import { sendForm } from '../../lib/sendForm'
 import { STAGES, useStage, type LevelKey } from './stage'
 
 /* Options are buttons (chips). "haciendo" uses the brand-map keys so the hero
@@ -169,35 +170,23 @@ export function FeriaForm() {
     }
     if (!check()) return
     setStatus('sending')
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `Feria: diagnóstico para ${data.empresa.trim()}`,
-          from_name: 'Landing feria Vínculo',
-          replyto: data.email.trim(),
-          botcheck: '',
-          Nombre: data.nombre.trim(),
-          Marca: data.empresa.trim(),
-          Rubro: rubroText(data),
-          'Hoy tiene': data.haciendo.map(labelFor).join(', '),
-          'Le gustaría': data.quiere.join(', '),
-          Teléfono: data.telefono.trim(),
-          Mail: data.email.trim(),
-          Mensaje: data.mensaje.trim() || '(sin mensaje)',
-          'Eligió en el hero': stage ? STAGES[stage].label : '(no eligió)',
-        }),
-      })
-      const json = (await res.json().catch(() => ({}))) as { success?: boolean }
-      if (res.ok && json.success) {
-        trackLead()
-        setStatus('sent')
-      } else setStatus('error')
-    } catch {
-      setStatus('error')
-    }
+    const ok = await sendForm(
+      `Feria: diagnóstico para ${data.empresa.trim()}`,
+      {
+        Nombre: data.nombre.trim(),
+        Marca: data.empresa.trim(),
+        Rubro: rubroText(data),
+        'Hoy tiene': data.haciendo.map(labelFor).join(', '),
+        'Le gustaría': data.quiere.join(', '),
+        Teléfono: data.telefono.trim(),
+        Mail: data.email.trim(),
+        Mensaje: data.mensaje.trim() || '(sin mensaje)',
+        'Eligió en el hero': stage ? STAGES[stage].label : '(no eligió)',
+      },
+      data.email.trim(),
+    )
+    if (ok) trackLead()
+    setStatus(ok ? 'sent' : 'error')
   }
 
   return (

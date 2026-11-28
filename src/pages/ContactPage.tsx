@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { Video, Mail, MessageCircle, MapPin, Linkedin, Instagram, ArrowRight } from 'lucide-react'
 import { IsoV3D } from '../components/IsoV3D'
 import { Reveal } from '../components/ui/motion'
-import { openCalendly, WHATSAPP_URL, FORM_TO_EMAIL } from '../lib/constants'
+import { openCalendly, WHATSAPP_URL } from '../lib/constants'
 import { trackLead } from '../lib/track'
+import { deliverForm } from '../lib/sendForm'
 
 const inputClasses =
   'w-full rounded-xl border border-[#EBE8DF] bg-white px-4 py-3 font-jakarta text-[14px] transition focus:border-[#0C3A30] focus:outline-none focus:ring-2 focus:ring-[#0C3A30]/10'
@@ -125,17 +126,19 @@ function InfoItem({ icon, title, children }: { icon: ReactNode; title: string; c
 function ContactForm() {
   const navigate = useNavigate()
   const [data, setData] = useState({ nombre: '', email: '', mensaje: '' })
+  const [sending, setSending] = useState(false)
   const valid = data.nombre.trim() !== '' && data.email.trim() !== '' && data.mensaje.trim() !== ''
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!valid) return
-    // Abrimos el cliente de correo sin desmontar la SPA (entrega interina, sin backend).
-    const subject = `Nuevo mensaje de ${data.nombre} — Vínculo`
-    const body = `Nombre: ${data.nombre}\nEmail: ${data.email}\n\nMensaje:\n${data.mensaje}`
-    const mail = document.createElement('a')
-    mail.href = `mailto:${FORM_TO_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-    mail.click()
+    if (!valid || sending) return
+    setSending(true)
+    // Web3Forms when the key is set; otherwise the visitor's mail app.
+    await deliverForm(
+      `Nuevo mensaje de ${data.nombre} — Vínculo`,
+      { Nombre: data.nombre, Email: data.email, Mensaje: data.mensaje },
+      data.email,
+    )
     // Conversión medible + página de gracias.
     trackLead()
     navigate('/gracias')
@@ -178,10 +181,10 @@ function ContactForm() {
       </label>
       <button
         type="submit"
-        disabled={!valid}
+        disabled={!valid || sending}
         className="inline-flex items-center justify-center gap-2 self-start rounded-full bg-[#C8A45A] px-6 py-3 font-jakarta text-[14px] font-semibold text-[#0F1A15] transition-colors hover:bg-[#B8942F] disabled:cursor-not-allowed disabled:opacity-40"
       >
-        Enviar mensaje
+        {sending ? 'Enviando…' : 'Enviar mensaje'}
         <ArrowRight size={16} />
       </button>
     </form>
