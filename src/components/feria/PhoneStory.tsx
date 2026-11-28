@@ -10,6 +10,8 @@ import {
   Bookmark,
   Check,
   CheckCheck,
+  ChevronLeft,
+  ChevronRight,
   Heart,
   MapPin,
   MessageCircle,
@@ -283,10 +285,62 @@ export function PhoneStory() {
   const [active, setActive] = useState(0)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
+  // Direction of the last change, so screens slide in from the right side
+  // when advancing and from the left when going back.
+  const [dir, setDir] = useState(1)
+  const activeRef = useRef(0)
   useMotionValueEvent(scrollYProgress, 'change', (p) => {
     const i = Math.min(STEPS.length - 1, Math.max(0, Math.floor(p * STEPS.length)))
-    setActive((prev) => (prev === i ? prev : i))
+    if (i === activeRef.current) return
+    setDir(i > activeRef.current ? 1 : -1)
+    activeRef.current = i
+    setActive(i)
   })
+
+  /**
+   * Sideways = vertical: going to a step scrolls the page to that step's slice,
+   * so swiping, the arrows and scrolling always stay in sync. Past either end
+   * it releases the pinned section and keeps scrolling the page.
+   */
+  const goTo = (i: number) => {
+    const el = ref.current
+    if (!el) return
+    const range = el.offsetHeight - window.innerHeight
+    if (range <= 0) return
+    // Measure from the current progress (the same value that picks the step),
+    // not from absolute offsets, so it can't drift while the page moves.
+    const beyond = (window.innerHeight * 0.6) / range
+    const targetP =
+      i < 0 ? -beyond : i >= STEPS.length ? 1 + beyond : (i + 0.5) / STEPS.length
+    const delta = (targetP - scrollYProgress.get()) * range
+    window.scrollTo({ top: window.scrollY + delta, behavior: 'smooth' })
+  }
+
+  // Touch: a mostly-horizontal swipe moves one step (left = next, like scrolling down).
+  const touch = useRef<{ x: number; y: number } | null>(null)
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]
+    touch.current = { x: t.clientX, y: t.clientY }
+  }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touch.current
+    touch.current = null
+    if (!start) return
+    const t = e.changedTouches[0]
+    const dx = t.clientX - start.x
+    const dy = t.clientY - start.y
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.3) goTo(activeRef.current + (dx < 0 ? 1 : -1))
+  }
+
+  // Trackpad / horizontal wheel: one step per gesture.
+  const lastWheel = useRef(0)
+  const onWheel = (e: React.WheelEvent) => {
+    if (Math.abs(e.deltaX) < 25 || Math.abs(e.deltaX) < Math.abs(e.deltaY)) return
+    const now = Date.now()
+    if (now - lastWheel.current < 700) return
+    lastWheel.current = now
+    goTo(activeRef.current + (e.deltaX > 0 ? 1 : -1))
+  }
 
   const intro = (
     <h2
@@ -324,8 +378,13 @@ export function PhoneStory() {
     <section className="bg-[#0C3A30]">
       <div className="mx-auto max-w-6xl px-5 pt-24 sm:px-8 lg:px-12">{intro}</div>
 
-      <div ref={ref} className="relative" style={{ height: `${STEPS.length * 90}vh` }}>
-        <div className="sticky top-0 mx-auto grid h-[100svh] max-w-6xl grid-rows-[1fr_auto] items-center gap-5 px-5 pb-24 pt-6 sm:px-8 md:grid-cols-[1fr_auto] md:grid-rows-1 md:gap-16 md:py-6 lg:px-12">
+      <div ref={ref} className="relative" style={{ height: `${STEPS.length * 55}vh` }}>
+        <div
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          onWheel={onWheel}
+          className="sticky top-0 mx-auto grid h-[100svh] max-w-6xl touch-pan-y grid-rows-[1fr_auto] items-center gap-5 px-5 pb-24 pt-6 sm:px-8 md:grid-cols-[1fr_auto] md:grid-rows-1 md:gap-16 md:py-6 lg:px-12"
+        >
           {/* Text (below the phone on mobile, left on desktop) */}
           <div className="order-2 min-h-[12.5rem] md:order-1 md:min-h-0">
             <AnimatePresence mode="wait">
@@ -340,29 +399,61 @@ export function PhoneStory() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Progress: one bar per step */}
-            <div className="mt-6 flex gap-1.5" aria-hidden="true">
-              {STEPS.map((s, i) => (
-                <span
-                  key={s.key}
-                  className={`h-1 rounded-full transition-all duration-500 ${
-                    i === active ? 'w-10 bg-[#C8A45A]' : 'w-4 bg-[#F7F5F0]/20'
-                  }`}
-                />
-              ))}
+            {/* Arrows + one tappable bar per step (same as scrolling). */}
+            <div className="mt-5 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => goTo(active - 1)}
+                aria-label="Pieza anterior"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#F7F5F0]/20 text-[#F7F5F0] transition-colors hover:border-[#C8A45A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C8A45A]"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <div className="flex items-center gap-1">
+                {STEPS.map((s, i) => (
+                  <button
+                    key={s.key}
+                    type="button"
+                    onClick={() => goTo(i)}
+                    aria-label={s.name}
+                    aria-current={i === active ? 'step' : undefined}
+                    className="flex h-8 items-center px-0.5"
+                  >
+                    <span
+                      className={`h-1 rounded-full transition-all duration-500 ${
+                        i === active ? 'w-10 bg-[#C8A45A]' : 'w-4 bg-[#F7F5F0]/25'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => goTo(active + 1)}
+                aria-label="Pieza siguiente"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#F7F5F0]/20 text-[#F7F5F0] transition-colors hover:border-[#C8A45A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C8A45A]"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
 
           {/* Phone */}
-          <div className="order-1 h-full max-h-[50svh] min-h-0 md:order-2 md:max-h-[620px] md:h-[80svh]">
+          <div className="order-1 h-full max-h-[44svh] min-h-0 md:order-2 md:max-h-[620px] md:h-[80svh]">
             <Phone>
-              <AnimatePresence initial={false}>
+              <AnimatePresence initial={false} custom={dir}>
                 <motion.div
                   key={step.key}
                   className="absolute inset-0"
-                  initial={{ opacity: 0, scale: 1.04 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
+                  custom={dir}
+                  variants={{
+                    enter: (d: number) => ({ x: `${d * 100}%` }),
+                    center: { x: '0%' },
+                    exit: (d: number) => ({ x: `${d * -100}%` }),
+                  }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
                   transition={{ duration: 0.45, ease: EASE }}
                 >
                   {step.screen}

@@ -174,7 +174,7 @@ export function NotificationRush() {
   }
 
   return (
-    <section ref={ref} className="relative h-[360vh] bg-[#F7F5F0]">
+    <section ref={ref} className="relative h-[250vh] bg-[#F7F5F0]">
       <div className="sticky top-0 flex h-[100svh] items-center px-5 pb-20 pt-6 sm:px-8 md:pb-6 lg:px-12">
         <div className="mx-auto grid h-full w-full max-w-6xl grid-rows-[auto_1fr] items-center gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-12">
           {text}

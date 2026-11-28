@@ -228,7 +228,7 @@ export function BrandMap() {
   }
 
   return (
-    <section id="mapa" ref={ref} className="relative h-[240vh] bg-[#F7F5F0]">
+    <section id="mapa" ref={ref} className="relative h-[180vh] bg-[#F7F5F0]">
       <div className="sticky top-0 flex h-[100svh] items-center px-5 pb-20 pt-6 sm:px-8 md:pb-6 lg:px-12">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-6 md:grid-cols-2 md:gap-12">
           {text}

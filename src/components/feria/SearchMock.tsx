@@ -100,7 +100,7 @@ export function SearchMock() {
   }
 
   return (
-    <section ref={ref} className="relative h-[240vh] bg-[#F7F5F0]">
+    <section ref={ref} className="relative h-[180vh] bg-[#F7F5F0]">
       <div className="sticky top-0 flex min-h-[100svh] items-center px-5 py-10 sm:px-8 lg:px-12">
         {content}
       </div>

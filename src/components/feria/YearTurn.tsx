@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 
 /**
  * The "new year" turn: a giant 2026 whose last digit rolls to 7 as you scroll,
@@ -10,11 +11,11 @@ export function YearTurn() {
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
-  // Digit roll: 0 → 0.45 of progress moves the 6/7 strip up one line.
-  const rollY = useTransform(scrollYProgress, [0.1, 0.45], ['0%', '-50%'])
-  const yearColor = useTransform(scrollYProgress, [0.3, 0.45], ['#F7F5F0', '#C8A45A'])
-  const msgOpacity = useTransform(scrollYProgress, [0.45, 0.65], [0, 1])
-  const msgY = useTransform(scrollYProgress, [0.45, 0.65], [30, 0])
+  // Digit roll: 0.05 → 0.35 of progress moves the 6/7 strip up one line.
+  const rollY = useTransform(scrollYProgress, [0.05, 0.35], ['0%', '-50%'])
+  const yearColor = useTransform(scrollYProgress, [0.2, 0.35], ['#F7F5F0', '#C8A45A'])
+  const msgOpacity = useTransform(scrollYProgress, [0.35, 0.55], [0, 1])
+  const msgY = useTransform(scrollYProgress, [0.35, 0.55], [30, 0])
 
   if (reduce) {
     return (
@@ -28,7 +29,7 @@ export function YearTurn() {
   }
 
   return (
-    <section ref={ref} className="relative h-[220vh] bg-[#072620]">
+    <section ref={ref} className="relative h-[170vh] bg-[#072620]">
       <div className="sticky top-0 flex h-[100svh] flex-col items-center justify-center overflow-hidden px-5 text-center sm:px-8">
         <motion.p
           aria-label="2027"
@@ -48,6 +49,21 @@ export function YearTurn() {
         <motion.div style={{ opacity: msgOpacity, y: msgY }}>
           <YearMessage />
         </motion.div>
+
+        {/* Nudge to keep scrolling (sits above the mobile WhatsApp bar). */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-24 flex flex-col items-center gap-1 font-jakarta text-[13px] text-[#F7F5F0]/60 md:bottom-8"
+        >
+          Seguí bajando
+          <motion.span
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C8A45A]/50 text-[#C8A45A]"
+          >
+            <ChevronDown className="h-5 w-5" />
+          </motion.span>
+        </div>
       </div>
     </section>
   )
